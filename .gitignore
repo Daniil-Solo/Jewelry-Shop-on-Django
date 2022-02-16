@@ -1,0 +1,6 @@
+venv
+.idea
+secret.py
+__init__.py
+*.sqlite3
+*.pyc
