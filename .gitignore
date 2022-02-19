@@ -1,5 +1,6 @@
 venv
 .idea
+migrations
 secret.py
 __init__.py
 *.sqlite3
