@@ -1,0 +1,17 @@
+{% extends 'core/content.html' %}
+{% load static %}
+
+
+<ul>
+    {% for jew in jewelries %}
+    <li>
+        <p>
+            Название: {{jew.title}}<br>
+            Цена: {{jew.price}}<br>
+        </p>
+        <hr>
+    </li>
+    {% endfor %}
+</ul>
+{% block content %}
+{% endblock %}

@@ -1,0 +1,43 @@
+.center{
+    display:block;
+    margin: 0 auto;
+}
+
+.without_space{
+    margin: 0;
+    padding: 0;
+}
+.without_box:focus{
+    box-shadow: none;
+}
+
+.dark-green{
+    background: #268371;
+    color: white;
+}
+.light-green{
+    background-color: #459989;
+    color: white;
+}
+.pretty-green{
+    background-color: #5DB4A3;
+    color: white;
+}
+
+#search_icon{
+    background: white;
+    fill: #CBCBCB;
+    border-right: 0;
+    border-radius: 0;
+}
+#search_input{
+    border-left: 0;
+}
+#search_btn{
+    border-radius: 0;
+}
+
+.btn:hover{
+    color: #FFFFFF;
+    text-decoration: underline;
+}
