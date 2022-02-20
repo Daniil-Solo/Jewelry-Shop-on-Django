@@ -14,19 +14,21 @@ class JewelryCatalog(ListView):
         return context
 
     def get_queryset(self):
-        jewelries = self.model.objects.all()
+        jewelries = self.model.objects.select_related('jew_cat', 'metal_cat').values(
+            "title", "price"
+        )
         filters = self.request.GET.dict()
         if filters:
             if filters.get("category"):
-                params = filters["category"].split("_")
+                params = filters["category"].split(",")
                 print(params)
                 jewelries = jewelries.filter(jew_cat__slug__in=params)
             if filters.get("metal"):
-                params = filters["metal"].split("_")
+                params = filters["metal"].split(",")
                 jewelries = jewelries.filter(metal_cat__slug__in=params)
                 print(params)
             if filters.get("material"):
-                params = filters["material"].split("_")
+                params = filters["material"].split(",")
                 jewelries = jewelries.filter(material_cats__slug__in=params)
                 print(params)
             if filters.get("min_price"):
@@ -41,4 +43,4 @@ class JewelryCatalog(ListView):
                 params = bool(int(filters["in_stock"]))
                 jewelries = jewelries.filter(is_in_stock__exact=params)
                 print(params)
-        return jewelries
+        return jewelries.distinct()
