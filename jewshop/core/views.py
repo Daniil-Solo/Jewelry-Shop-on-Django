@@ -1,17 +1,18 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import *
+from .utils import *
 
 
-class JewelryCatalog(ListView):
+class JewelryCatalog(MenuMixin, ListView):
     model = Jewelry
     template_name = "core/jewelry_catalog.html"
     context_object_name = "jewelries"
 
-    def get_context(self, *args, object_list=None, **kwargs):
+    def get_context_data(self, *args, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Каталог"
-        return context
+        menu_context = self.get_menu_context_data(title="Каталог")
+        return {**context, **menu_context}
 
     def get_queryset(self):
         jewelries = self.model.objects.select_related('jew_cat', 'metal_cat').values(
