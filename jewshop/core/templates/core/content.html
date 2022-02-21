@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block header %}
+{% block content %}
 <header class="light-green">
     <a href="#">
         <img class="center" src="{%static 'core/images/logo.png' %}"  alt="Логотип">
@@ -65,10 +65,41 @@
         </div>
     </nav>
 </section>
-{% endblock %}
 
-{% block content %}
-{% endblock content %}
+{% block maincontent %}
+{% endblock maincontent %}
 
-{% block footer %}
+<footer class="pretty-green">
+    <div class="container text-center">
+         <div class="row">
+            <div class="col-4">
+                <br><h6>РУЧНАЯ РАБОТА</h6><br>
+                <h6>Каталог</h6>
+                {% for item in catalog %}
+                <a class="btn pretty-green without_box" href="{% url item.url %}">
+                    {{item.title}}
+                </a><br>
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                <br><h6>КРАСИВАЯ УПАКОВКА</h6><br>
+                <h6>Покупателям</h6>
+                {% for item in for_buyers %}
+                <a class="btn pretty-green without_box" href="{% url item.url %}">
+                    {{item.title}}
+                </a><br>
+                {% endfor %}
+            </div>
+            <div class="col-4">
+                <br><h6>ГАРАНТИЯ КАЧЕСТВА</h6><br>
+                <h6>Информация</h6>
+                {% for item in info %}
+                <a class="btn pretty-green without_box" href="{% url item.url %}">
+                    {{item.title}}
+                </a><br>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</footer>
 {% endblock %}
