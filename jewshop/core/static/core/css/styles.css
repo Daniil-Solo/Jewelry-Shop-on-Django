@@ -36,6 +36,9 @@
     border-right: 0;
     border-radius: 0;
 }
+a>svg:hover{
+    fill: #268371;
+}
 #search_input{
     border-left: 0;
 }
@@ -46,11 +49,6 @@
 .btn-underline:hover{
     color: #FFFFFF;
     text-decoration: underline;
-}
-
-.btn-detail{
-    background-color: #5DB4A3;
-    color: white;
 }
 .btn-detail:hover{
     background-color: #268371;

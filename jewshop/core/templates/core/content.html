@@ -6,7 +6,6 @@
     <a href="#">
         <img class="center" src="{%static 'core/images/logo.png' %}"  alt="Логотип">
     </a>
-
     <div class="input-group">
         <span class="input-group-text" id="search_icon">
             <svg width="16" height="16">
@@ -14,7 +13,7 @@
             </svg>
         </span>
         <input type="text" id="search_input" class="form-control without_box" placeholder="Поиск товаров">
-        <button class="btn without_box dark-green" id="search_btn" type="submit">Найти</button>
+        <button class="btn btn-underline without_box dark-green" id="search_btn" type="submit">Найти</button>
     </div>
 </header>
 <section class="pretty-green">
@@ -22,19 +21,19 @@
         <div class="container">
             <ul class="navbar-nav nav-pills nav-fill">
                 <li class="nav-item dark-green">
-                    <a class="btn dark-green without_box" href="#">Категории</a>
+                    <a class="btn btn-underline dark-green without_box" href="#">Категории</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn pretty-green without_box" href="#">Новинки</a>
+                    <a class="btn btn-underline pretty-green without_box" href="#">Новинки</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn pretty-green without_box" href="#">Покупателям</a>
+                    <a class="btn btn-underline pretty-green without_box" href="#">Покупателям</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn pretty-green without_box" href="#">О бренде</a>
+                    <a class="btn btn-underline pretty-green without_box" href="#">О бренде</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn pretty-green without_box" href="#">Контакты</a>
+                    <a class="btn btn-underline pretty-green without_box" href="#">Контакты</a>
                 </li>
                 <li class="nav-item">
                     <ul class="navbar-nav">
@@ -76,7 +75,7 @@
                 <br><h6>РУЧНАЯ РАБОТА</h6><br>
                 <h6>Каталог</h6>
                 {% for item in catalog %}
-                <a class="btn pretty-green without_box" href="{% url item.url %}">
+                <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
                     {{item.title}}
                 </a><br>
                 {% endfor %}
@@ -85,7 +84,7 @@
                 <br><h6>КРАСИВАЯ УПАКОВКА</h6><br>
                 <h6>Покупателям</h6>
                 {% for item in for_buyers %}
-                <a class="btn pretty-green without_box" href="{% url item.url %}">
+                <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
                     {{item.title}}
                 </a><br>
                 {% endfor %}
@@ -94,12 +93,13 @@
                 <br><h6>ГАРАНТИЯ КАЧЕСТВА</h6><br>
                 <h6>Информация</h6>
                 {% for item in info %}
-                <a class="btn pretty-green without_box" href="{% url item.url %}">
+                <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
                     {{item.title}}
                 </a><br>
                 {% endfor %}
             </div>
         </div>
     </div>
+    <br>
 </footer>
 {% endblock %}
