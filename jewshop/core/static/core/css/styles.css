@@ -23,6 +23,12 @@
     background-color: #5DB4A3;
     color: white;
 }
+.title-gray{
+    color: #7E7979;
+}
+.price-gray{
+    color: #A5A5A5;
+}
 
 #search_icon{
     background: white;
@@ -37,7 +43,16 @@
     border-radius: 0;
 }
 
-.btn:hover{
+.btn-underline:hover{
     color: #FFFFFF;
     text-decoration: underline;
+}
+
+.btn-detail{
+    background-color: #5DB4A3;
+    color: white;
+}
+.btn-detail:hover{
+    background-color: #268371;
+    color: white;
 }

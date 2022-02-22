@@ -1,17 +1,41 @@
 {% extends 'core/content.html' %}
 {% load static %}
 
-
-<ul>
-    {% for jew in jewelries %}
-    <li>
-        <p>
-            Название: {{jew.title}}<br>
-            Цена: {{jew.price}}<br>
-        </p>
-        <hr>
-    </li>
-    {% endfor %}
-</ul>
 {% block maincontent %}
+<section>
+    <br><br>
+    <div class="row">
+        <br>
+        <div class="col-lg-2 ">
+            <div class="pretty-green">
+                <br><h5 class="text-center">Каталог</h5><br>
+
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="container">
+                <h6 class="text-center display-6">Украшения</h6>
+                <br>
+                <div class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2 g-5">
+                {% for jew in jewelries %}
+                    <div class="col">
+                        <div class="card  text-center">
+                            <img src="..." class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title title-gray">{{jew.title}}</h5>
+                                <p class="card-text price-gray">{{jew.price|floatformat:"0"}} руб.</p>
+                                <a href="#" class="btn btn-detail pretty-green without_box">Подробнее</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <br><br><br><br><br><br>
+    </div>
+</section>
 {% endblock %}
