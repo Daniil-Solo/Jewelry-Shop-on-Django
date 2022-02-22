@@ -17,7 +17,7 @@ class Jewelry(models.Model):
     )
     material_cats = models.ManyToManyField(
         to="Material",
-        verbose_name="материал"
+        verbose_name="материал",
     )
     metal_cat = models.ForeignKey(
         to="Metal",
@@ -33,6 +33,8 @@ class Jewelry(models.Model):
 
     date_create = models.DateField(auto_now_add=True, verbose_name="дата создания")
     date_edit = models.DateField(auto_now=True, verbose_name="дата редактирования")
+
+    main_photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name="главное фото")
 
     def __str__(self):
         return self.title
