@@ -19,12 +19,14 @@ class JewelryCatalog(MenuMixin, ListView):
         context["categories"] = Category.objects.values("title", "slug")
         context["metals"] = Metal.objects.values("title", "slug")
         context["materials"] = Material.objects.values("title", "slug")
+        context["old_filters"] = self.request.GET.dict()
+        if context["old_filters"]:
+            for key in context["old_filters"]:
+                context["old_filters"][key] = self.request.GET.getlist(key)
         return {**context, **menu_context}
 
     def get_queryset(self):
-        jewelries = self.model.objects.select_related('jew_cat', 'metal_cat').values(
-            "title", "price"
-        )
+        jewelries = self.model.objects.values("title", "price")
         filters = self.request.GET.dict()
         if filters:
             if filters.get("category"):

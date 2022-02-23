@@ -12,50 +12,72 @@
                 <form action="" enctype="application/x-www-form-urlencoded" method="get">
                     <div>
                         <h5>Цена, ₽</h5>
+                        {% if old_filters.min_price %}
+                        <input name="min_price" class="input_price" value={{old_filters.min_price.0|floatformat:"0"}} min={{min_price|floatformat:"0"}} max={{max_price|floatformat:"0"}} type="number">
+                        {% else %}
                         <input name="min_price" class="input_price" value={{min_price|floatformat:"0"}} min={{min_price|floatformat:"0"}} max={{max_price|floatformat:"0"}} type="number">
+                        {% endif %}
                         —
+                        {% if old_filters.max_price %}
+                        <input name="max_price" class="input_price" value={{old_filters.max_price.0|floatformat:"0"}} min={{min_price|floatformat:"0"}} max={{max_price|floatformat:"0"}} type="number">
+                        {% else %}
                         <input name="max_price" class="input_price" value={{max_price|floatformat:"0"}} min={{min_price|floatformat:"0"}} max={{max_price|floatformat:"0"}} type="number">
+                        {% endif %}
                     </div>
                     <div>
+                        {% if old_filters.in_stock %}
+                        <input checked name="in_stock" type="checkbox" value="1"> в наличии
+                        {% else %}
                         <input name="in_stock" type="checkbox" value="1"> в наличии
+                        {% endif %}
                     </div>
                     <div>
                         <h5>Категории</h5>
-                        <div class="__select">
-                            <div class="__select__content">
-                                {% for cat in categories %}
-                                <input class="__select__input" type="checkbox" name="category" value="{{cat.slug}}">
-                                {{cat.title}}<br>
-                                {% endfor %}
-                            </div>
+                        <div>
+                            {% for cat in categories %}
+                            {% if cat.slug in old_filters.category %}
+                            <input checked type="checkbox" name="category" value="{{cat.slug}}">
+                            {% else %}
+                            <input type="checkbox" name="category" value="{{cat.slug}}">
+                            {% endif %}
+                            {{cat.title}}<br>
+                            {% endfor %}
                         </div>
                     </div>
                     <div>
                         <h5>Материал</h5>
-                        <div class="__select">
-                            <div class="__select__content">
-                                {% for material in materials %}
-                                <input class="__select__input" type="checkbox" name="material" value="{{material.slug}}">
-                                {{material.title}}<br>
-                                {% endfor %}
-                            </div>
+                        <div>
+                            {% for material in materials %}
+                            {% if material.slug in old_filters.material %}
+                            <input checked type="checkbox" name="material" value="{{material.slug}}">
+                            {% else %}
+                            <input type="checkbox" name="material" value="{{material.slug}}">
+                            {% endif %}
+                            {{material.title}}<br>
+                            {% endfor %}
                         </div>
                     </div>
                     <div>
                         <h5>Фурнитура</h5>
-                        <div class="__select">
-                            <div class="__select__content">
-                                {% for metal in metals %}
-                                <input class="__select__input" type="checkbox" name="metal" value="{{metal.slug}}">
-                                {{metal.title}}<br>
-                                {% endfor %}
-                            </div>
+                        <div>
+                            {% for metal in metals %}
+                            {% if metal.slug in old_filters.metal %}
+                            <input checked type="checkbox" name="metal" value="{{metal.slug}}">
+                            {% else %}
+                            <input type="checkbox" name="metal" value="{{metal.slug}}">
+                            {% endif %}
+                            {{metal.title}}<br>
+                            {% endfor %}
                         </div>
                     </div>
                     <br>
-                    <div>
-                         <button class="btn btn-underline without_box dark-green" type="submit">Показать</button>
-                         <button class="btn btn-underline without_box dark-green" type="reset">Очистить</button>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn btn-underline without_box dark-green" type="submit">Показать</button>
+                        </div>
+                         <div class="col-6">
+                            <a class="btn btn-underline without_box dark-green" href="{% url 'catalog' %}">Очистить</a>
+                        </div>
                     </div>
                     <br>
                 </form>
