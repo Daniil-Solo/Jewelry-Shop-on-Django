@@ -33,16 +33,14 @@
 #search_icon{
     background: white;
     fill: #CBCBCB;
-    border-right: 0;
+    border: 0;
     border-radius: 0;
 }
 a>svg:hover{
     fill: #268371;
 }
 #search_input{
-    border-left: 0;
-    border-bot: 0;
-    border-top: 0;
+    border: 0;
 }
 #search_btn{
     border-radius: 0;
@@ -58,4 +56,8 @@ a>svg:hover{
 }
 .btn-collapse:hover{
     background-color: #459989;
+}
+
+.input_price{
+    border: 0;
 }
