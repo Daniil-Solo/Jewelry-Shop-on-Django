@@ -41,6 +41,8 @@ a>svg:hover{
 }
 #search_input{
     border-left: 0;
+    border-bot: 0;
+    border-top: 0;
 }
 #search_btn{
     border-radius: 0;
@@ -53,4 +55,7 @@ a>svg:hover{
 .btn-detail:hover{
     background-color: #268371;
     color: white;
+}
+.btn-collapse:hover{
+    background-color: #459989;
 }
