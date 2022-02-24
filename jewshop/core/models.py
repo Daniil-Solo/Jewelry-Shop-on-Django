@@ -39,10 +39,20 @@ class Jewelry(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Украшение"
+        verbose_name_plural = "Украшения"
+        ordering = ["-date_create", "title"]
+
 
 class Gallery(models.Model):
-    image = models.ImageField(upload_to='photos/%Y/%m/%d/')
-    jewelry = models.ForeignKey(to="Jewelry", on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name="изображение")
+    jewelry = models.ForeignKey(to="Jewelry", on_delete=models.CASCADE, related_name='images', verbose_name="украшение")
+
+    class Meta:
+        verbose_name = "Галерея"
+        verbose_name_plural = "Галереи"
+        ordering = ["jewelry"]
 
 
 class Category(models.Model):
@@ -51,6 +61,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+        ordering = ["title"]
 
 
 class Material(models.Model):
@@ -62,6 +77,11 @@ class Material(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Материал"
+        verbose_name_plural = "Материалы"
+        ordering = ["title"]
+
 
 class Metal(models.Model):
     title = models.CharField(max_length=50, verbose_name="название")
@@ -69,3 +89,8 @@ class Metal(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Фурнитура"
+        verbose_name_plural = "Фурнитура"
+        ordering = ["title"]
