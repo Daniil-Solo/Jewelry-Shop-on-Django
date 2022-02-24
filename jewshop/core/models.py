@@ -42,7 +42,7 @@ class Jewelry(models.Model):
     class Meta:
         verbose_name = "Украшение"
         verbose_name_plural = "Украшения"
-        ordering = ["-date_create", "title"]
+        ordering = ["title"]
 
 
 class Gallery(models.Model):
