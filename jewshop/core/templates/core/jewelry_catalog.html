@@ -91,7 +91,7 @@
                 {% for jew in jewelries %}
                     <div class="col">
                         <div class="card  text-center">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="{{jew.main_photo.url}}" class="card-img-top" alt="фото украшения">
                             <div class="card-body">
                                 <h5 class="card-title title-gray">{{jew.title}}</h5>
                                 <p class="card-text price-gray">{{jew.price|floatformat:"0"}} руб.</p>

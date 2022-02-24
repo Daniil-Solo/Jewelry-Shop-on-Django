@@ -1,5 +1,6 @@
 venv
 .idea
+media
 migrations
 secret.py
 __init__.py

@@ -26,7 +26,7 @@ class JewelryCatalog(MenuMixin, ListView):
         return {**context, **menu_context}
 
     def get_queryset(self):
-        jewelries = self.model.objects.values("title", "price")
+        jewelries = self.model.objects.only("title", "price", "main_photo")
         filters = self.request.GET.dict()
         if filters:
             if filters.get("category"):
