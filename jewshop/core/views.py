@@ -5,6 +5,19 @@ from .utils import *
 from django.db.models import Min, Max
 
 
+class JewelryView(MenuMixin, DetailView):
+    model = Jewelry
+    template_name = "core/jewelry_view.html"
+    slug_url_kwarg = "jew_slug"
+    context_object_name = "jew"
+
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["image_links"] = [gallery.image.url for gallery in context["jew"].images.all()]
+        menu_context = self.get_menu_context_data(title="Украшение")
+        return {**context, **menu_context}
+
+
 class JewelryCatalog(MenuMixin, ListView):
     model = Jewelry
     template_name = "core/jewelry_catalog.html"
