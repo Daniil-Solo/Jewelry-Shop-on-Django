@@ -95,7 +95,7 @@
                             <div class="card-body">
                                 <h5 class="card-title title-gray">{{jew.title}}</h5>
                                 <p class="card-text price-gray">{{jew.price|floatformat:"0"}} руб.</p>
-                                <a href="#" class="btn btn-detail pretty-green without_box">Подробнее</a>
+                                <a href="{{ jew.get_absolute_url }}" class="btn btn-detail pretty-green without_box">Подробнее</a>
                             </div>
                         </div>
                     </div>
