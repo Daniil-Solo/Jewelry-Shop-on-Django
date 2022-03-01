@@ -67,7 +67,39 @@ section#catalog{
     margin-top: 50px;
     margin-bottom: 100px;
 }
-
+#catalog .container-fluid{
+    padding: 0px;
+}
+#catalog .container-fluid .row{
+    margin: 0px;
+}
 #catalog .container#filters{
-    padding: 30px;
+    padding: 10px;
+}
+#col-filter{
+    padding: 0px;
+}
+#filters .input_price{
+    width: 60px;
+}
+#catalog .container#jewelries{
+    padding: 0px;
+}
+#col-jewelries{
+    padding: 0px;
+}
+#jewelries h6{
+    margin: 5px 0px 20px 0px;
+}
+#jewelries .card-item {
+    padding: 15px;
+}
+#jewelries .card-footer{
+    border-top: 0px;
+    background: white;
+}
+#jewelries .card-img-top {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
 }
