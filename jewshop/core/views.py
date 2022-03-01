@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 from .models import *
 from .utils import *
 from django.db.models import Min, Max
@@ -39,7 +39,7 @@ class JewelryCatalog(MenuMixin, ListView):
         return {**context, **menu_context}
 
     def get_queryset(self):
-        jewelries = self.model.objects.only("title", "price", "main_photo")
+        jewelries = self.model.objects.only("title", "price", "main_photo", "slug")
         filters = self.request.GET.dict()
         if filters:
             if filters.get("category"):
