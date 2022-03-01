@@ -61,3 +61,13 @@ a>svg:hover{
 .input_price{
     border: 0;
 }
+
+/*---------  Каталог  ---------*/
+section#catalog{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+#catalog .container#filters{
+    padding: 30px;
+}
