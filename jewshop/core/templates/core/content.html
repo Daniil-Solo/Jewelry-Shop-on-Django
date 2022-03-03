@@ -24,7 +24,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
       <div class="container">
-          <br>
           <ul class="navbar-nav nav-pills nav-fill">
             <li class="nav-item dark-green">
                 <a class="btn btn-underline dark-green without_box" href="#">Категории</a>
@@ -75,38 +74,57 @@
 {% block maincontent %}
 {% endblock maincontent %}
 
-<footer class="pretty-green">
+<footer class="pretty-green" style="padding-top: 20px;">
     <div class="container text-center">
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-sm-4 col-12">
+                <h5>РУЧНАЯ РАБОТА</h5>
+            </div>
+            <div class="col-sm-4 col-12">
+                <h5>КРАСИВАЯ УПАКОВКА</h5>
+            </div>
+            <div class="col-sm-4 col-12">
+                <h5>ГАРАНТИЯ КАЧЕСТВА</h5>
+            </div>
+        </div>
          <div class="row">
-            <div class="col-4">
-                <br><h6>РУЧНАЯ РАБОТА</h6><br>
+            <div class="col-sm-4 col-12">
                 <h6>Каталог</h6>
-                {% for item in catalog %}
-                <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
-                    {{item.title}}
-                </a><br>
-                {% endfor %}
+                <ul>
+                    {% for item in catalog %}
+                    <li>
+                        <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
+                        {{item.title}}
+                    </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div class="col-4">
-                <br><h6>КРАСИВАЯ УПАКОВКА</h6><br>
+            <div class="col-sm-4 col-12">
                 <h6>Покупателям</h6>
-                {% for item in for_buyers %}
-                <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
-                    {{item.title}}
-                </a><br>
-                {% endfor %}
+                <ul>
+                    {% for item in for_buyers %}
+                    <li>
+                        <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
+                            {{item.title}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
-            <div class="col-4">
-                <br><h6>ГАРАНТИЯ КАЧЕСТВА</h6><br>
+            <div class="col-sm-4 col-12">
                 <h6>Информация</h6>
-                {% for item in info %}
-                <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
-                    {{item.title}}
-                </a><br>
-                {% endfor %}
+                <ul>
+                    {% for item in info %}
+                    <li>
+                        <a class="btn btn-underline pretty-green without_box" href="{% url item.url %}">
+                            {{item.title}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
-    <br>
 </footer>
 {% endblock %}
