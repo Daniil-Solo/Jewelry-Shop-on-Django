@@ -7,10 +7,10 @@
     <div class="row">
         <div class="col-lg-2" id="col-filter">
             <div class="container pretty-green" id="filters">
-                <h5 class="text-center">Каталог</h5><br>
+                <h4 class="text-center">Каталог</h4>
                 <form action="" enctype="application/x-www-form-urlencoded" method="get">
                     <div class="row">
-                        <div class="col-lg-12 col-md-4 col-sm-6 col-12">
+                        <div class="filter-item col-lg-12 col-md-4 col-sm-6 col-12">
                             <h5>Цена, ₽</h5>
                             {% if old_filters.min_price %}
                             <input name="min_price" class="input_price" value={{old_filters.min_price.0|floatformat:"0"}} min={{min_price|floatformat:"0"}} max={{max_price|floatformat:"0"}} type="number">
@@ -24,60 +24,65 @@
                             <input name="max_price" class="input_price" value={{max_price|floatformat:"0"}} min={{min_price|floatformat:"0"}} max={{max_price|floatformat:"0"}} type="number">
                             {% endif %}
                         </div>
-                        <div class="col-lg-12 col-md-4 col-sm-6 col-12">
+                        <div class="filter-item col-lg-12 col-md-4 col-sm-6 col-12">
                             {% if old_filters.in_stock %}
                             <input checked name="in_stock" type="checkbox" value="1"> в наличии
                             {% else %}
                             <input name="in_stock" type="checkbox" value="1"> в наличии
                             {% endif %}
                         </div>
-                        <div class="col-lg-12 col-md-4 col-sm-6 col-12">
+                        <div class="filter-item col-lg-12 col-md-4 col-sm-6 col-12">
                             <h5>Категории</h5>
-                            <div>
+                            <ul>
                                 {% for cat in categories %}
-                                {% if cat.slug in old_filters.category %}
-                                <input checked type="checkbox" name="category" value="{{cat.slug}}">
-                                {% else %}
-                                <input type="checkbox" name="category" value="{{cat.slug}}">
-                                {% endif %}
-                                {{cat.title}}<br>
+                                <li">
+                                    {% if cat.slug in old_filters.category %}
+                                    <input checked type="checkbox" name="category" value="{{cat.slug}}">
+                                    {% else %}
+                                    <input type="checkbox" name="category" value="{{cat.slug}}">
+                                    {% endif %}
+                                    {{cat.title}}
+                                </li>
                                 {% endfor %}
-                            </div>
+                            </ul>
                         </div>
-                        <div class="col-lg-12 col-md-4 col-sm-6 col-12">
+                        <div class="filter-item col-lg-12 col-md-4 col-sm-6 col-12">
                             <h5>Материал</h5>
-                            <div>
+                            <ul>
                                 {% for material in materials %}
-                                {% if material.slug in old_filters.material %}
-                                <input checked type="checkbox" name="material" value="{{material.slug}}">
-                                {% else %}
-                                <input type="checkbox" name="material" value="{{material.slug}}">
-                                {% endif %}
-                                {{material.title}}<br>
+                                <li>
+                                    {% if material.slug in old_filters.material %}
+                                    <input checked type="checkbox" name="material" value="{{material.slug}}">
+                                    {% else %}
+                                    <input type="checkbox" name="material" value="{{material.slug}}">
+                                    {% endif %}
+                                    {{material.title}}
+                                </li>
                                 {% endfor %}
-                            </div>
+                            </ul>
                         </div>
-                        <div class="col-lg-12 col-md-4 col-sm-6 col-12">
+                        <div class="filter-item col-lg-12 col-md-4 col-sm-6 col-12">
                             <h5>Фурнитура</h5>
-                            <div>
+                            <ul>
                                 {% for metal in metals %}
-                                {% if metal.slug in old_filters.metal %}
-                                <input checked type="checkbox" name="metal" value="{{metal.slug}}">
-                                {% else %}
-                                <input type="checkbox" name="metal" value="{{metal.slug}}">
-                                {% endif %}
-                                {{metal.title}}<br>
+                                <li>
+                                    {% if metal.slug in old_filters.metal %}
+                                    <input checked type="checkbox" name="metal" value="{{metal.slug}}">
+                                    {% else %}
+                                    <input type="checkbox" name="metal" value="{{metal.slug}}">
+                                    {% endif %}
+                                    {{metal.title}}
+                                </li>
                                 {% endfor %}
-                            </div>
+                            </ul>
                         </div>
                     </div>
-                    <br>
                     <div class="row">
                         <div class="col-12 col-sm-6 text-center">
-                            <a class="btn btn-underline without_box dark-green" type="submit">Показать</a>
+                            <button class="btn btn-underline without_box dark-green" type="submit">Показать</button>
                         </div>
                          <div class="col-12 col-sm-6 text-center">
-                            <a class="btn btn-underline without_box dark-green" href="{% url 'catalog' %}">Очистить</a>
+                            <button class="btn btn-underline without_box dark-green" href="{% url 'catalog' %}">Очистить</button>
                         </div>
                     </div>
                 </form>

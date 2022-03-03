@@ -61,7 +61,12 @@ a>svg:hover{
 .input_price{
     border: 0;
 }
-
+ul{
+    padding: 0px;
+}
+li{
+    list-style-type: none;
+}
 /*---------  Каталог  ---------*/
 section#catalog{
     margin-top: 50px;
@@ -84,6 +89,9 @@ section#catalog{
 }
 #catalog .container#jewelries{
     padding: 0px;
+}
+#catalog h4, .filter-item{
+    margin-top: 15px;
 }
 #col-jewelries{
     padding: 0px;
