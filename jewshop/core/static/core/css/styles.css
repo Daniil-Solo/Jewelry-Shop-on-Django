@@ -111,3 +111,18 @@ section#catalog{
     width: 100%;
     object-fit: cover;
 }
+/*---------  Подробное описание  ---------*/
+section#view{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+#view .title{
+    margin: 20px 0px;
+}
+#view .price{
+    margin-top: 20px;
+    margin-bottom: 60px;
+}
+#view .tag{
+    border-radius: 10px;
+}
