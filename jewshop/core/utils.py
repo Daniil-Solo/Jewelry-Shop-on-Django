@@ -2,22 +2,17 @@ class MenuMixin:
     @staticmethod
     def get_menu_context_data(**kwargs):
         context = kwargs
-        context["catalog"] = [
-            dict(title="Все украшения", url="catalog"),
-            dict(title="Материалы", url="catalog"),
-            dict(title="Подвески", url="catalog"),
-            dict(title="Браслеты", url="catalog"),
-            dict(title="Серьги", url="catalog"),
-            dict(title="Кольца", url="catalog"),
-        ]
         context["for_buyers"] = [
             dict(title="Доставка", url="catalog"),
             dict(title="Оплата", url="catalog"),
             dict(title="Уход", url="catalog"),
-            dict(title="FAQ", url="catalog"),
         ]
         context["info"] = [
-            dict(title="О бренде", url="catalog"),
-            dict(title="Контакты", url="catalog"),
+            dict(title="О нас", url="catalog"),
+        ]
+        context["contacts"] = [
+            dict(title="Вконтакте", url="https://vk.com/fragilemystery"),
+            dict(title="Instagram", url="https://www.instagram.com/fragilemystery/"),
+            dict(title="Telegram", url="https://t.me/fragilemystery"),
         ]
         return context
