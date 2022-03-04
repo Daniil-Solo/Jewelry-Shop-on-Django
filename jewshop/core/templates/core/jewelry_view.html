@@ -4,7 +4,7 @@
 {% block maincontent %}
 <section id="view">
     <div class="row">
-        <div class="col-5 dark-green">
+        <div class="col-lg-5 col-md-12 dark-green">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -26,7 +26,7 @@
               </button>
             </div>
          </div>
-        <div class="col-7">
+        <div class="col-lg-7 col-md-12">
             <div class="tags">
                 <h4>
                     {% if jew.is_in_stock %}
@@ -42,79 +42,79 @@
                 <h4 class="display-4">{{jew.title}}</h4>
             </div>
             <div class="price">
-                <h5 class="display-5">{{jew.price|floatformat:"0"}} ₽</h5>
+                <h5 class="display-5 price-gray">{{jew.price|floatformat:"0"}} ₽</h5>
             </div>
             <div>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="btn btn-detail pretty-green without_box" id="params-tab" data-bs-toggle="tab" data-bs-target="#params" type="button" role="tab">
-                    Характеристики
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                    <button class="btn btn-detail pretty-green without_box" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab">
-                    Об оплате
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="btn btn-detail pretty-green without_box" id="pack-tab" data-bs-toggle="tab" data-bs-target="#pack" type="button" role="tab">
-                    Об упаковке
-                </button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="btn btn-detail pretty-green without_box" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab">
-                    О доставке
-                </button>
-              </li>
-            </ul>
+                <ul class="nav pretty-green" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-detail pretty-green without_box active" id="params-tab" data-bs-toggle="tab" data-bs-target="#params" type="button" role="tab">
+                            Характеристики
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-detail pretty-green without_box" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab">
+                            Об оплате
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-detail pretty-green without_box" id="pack-tab" data-bs-toggle="tab" data-bs-target="#pack" type="button" role="tab">
+                            Об упаковке
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="btn btn-detail pretty-green without_box" id="delivery-tab" data-bs-toggle="tab" data-bs-target="#delivery" type="button" role="tab">
+                            О доставке
+                        </button>
+                    </li>
+                </ul>
                 <div class="tab-content" id="myTabContent">
-              <div class="tab-pane fade show active" id="params" role="tabpanel">
-                  {% if jew.weight %}
-                  <p>
-                      Вес: {{jew.weight}} г.
-                  </p>
-                  {% endif %}
-                  {% if jew.length %}
-                  <p>
-                      Длина: {{jew.length}} см.
-                  </p>
-                  {% endif %}
-                  {% if jew.width %}
-                  <p>
-                      Ширина: {{jew.width}} см.
-                  </p>
-                  {% endif %}
-                  {% if jew.description %}
-                  <p>
-                      Описание: {{jew.description}}
-                  </p>
-                  {% endif %}
-                  {% if jew.extra %}
-                  <p>
-                      Дополнительно: {{jew.extra}}
-                  </p>
-                  {% endif %}
-              </div>
-              <div class="tab-pane fade" id="payment" role="tabpanel">
-                    <p>
-                        Оплатить можно банковской картой при оформлении заказа через интернет-магазин.<br>
-                        <a href="#">Подробнее об оплате</a>
-                    </p>
-              </div>
-              <div class="tab-pane fade" id="pack" role="tabpanel">
-                    <p>
-                        Все украшения имеют фирменную подарочную упаковку с приятными сюрпризами внутри<br>
-                        <a href="#">Подробнее об упаковке</a>
-                  </p>
-              </div>
-              <div class="tab-pane fade" id="delivery" role="tabpanel">
-                    <p>
-                        - по Перми день-в-день при заказе до 13 часов или на следующий день в удобное время<br>
-                        - доставка почтой России 1 классом в течении 5 рабочих дней<br>
-                         <a href="#">Подробнее об доставке</a>
-                    </p>
-              </div>
-            </div>
+                    <div class="tab-pane fade show active" id="params" role="tabpanel">
+                        {% if jew.weight %}
+                        <p>
+                            Вес: {{jew.weight}} г.
+                        </p>
+                        {% endif %}
+                        {% if jew.length %}
+                        <p>
+                            Длина: {{jew.length}} см.
+                        </p>
+                        {% endif %}
+                        {% if jew.width %}
+                        <p>
+                            Ширина: {{jew.width}} см.
+                        </p>
+                        {% endif %}
+                        {% if jew.description %}
+                        <p>
+                            Описание: {{jew.description}}
+                        </p>
+                        {% endif %}
+                        {% if jew.extra %}
+                        <p>
+                            Дополнительно: {{jew.extra}}
+                        </p>
+                        {% endif %}
+                    </div>
+                    <div class="tab-pane fade" id="payment" role="tabpanel">
+                        <p>
+                            Оплатить можно банковской картой при оформлении заказа через интернет-магазин.<br>
+                            <a href="#">Подробнее об оплате</a>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="pack" role="tabpanel">
+                        <p>
+                            Все украшения имеют фирменную подарочную упаковку с приятными сюрпризами внутри<br>
+                            <a href="#">Подробнее об упаковке</a>
+                        </p>
+                    </div>
+                    <div class="tab-pane fade" id="delivery" role="tabpanel">
+                        <p>
+                            - по Перми день-в-день при заказе до 13 часов или на следующий день в удобное время<br>
+                            - доставка почтой России 1 классом в течении 5 рабочих дней<br>
+                             <a href="#">Подробнее об доставке</a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

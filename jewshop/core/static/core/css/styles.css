@@ -126,3 +126,21 @@ section#view{
 #view .tag{
     border-radius: 10px;
 }
+#view .row{
+    margin: 0px;
+}
+#view .tags{
+    margin-top: 15px;
+}
+#view #myTab{
+    border-bottom: 0;
+}
+#view #myTab button{
+    border-radius: 0px;
+}
+#view #myTab .active{
+    background: #268371;
+}
+#view .tab-pane{
+    padding: 10px 10px 0px 10px;
+}
