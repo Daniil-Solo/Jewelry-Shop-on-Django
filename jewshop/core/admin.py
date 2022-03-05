@@ -32,8 +32,15 @@ class MetalAdmin(admin.ModelAdmin):
     list_editable = ('title', 'slug')
 
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ("id", "title", "text", "stars")
+    search_fields = ("title",)
+    list_filter = ("stars",)
+
+
 admin.site.register(Jewelry, JewelryAdmin)
 admin.site.register(Gallery, GalleryAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Material, MaterialAdmin)
 admin.site.register(Metal, MetalAdmin)
+admin.site.register(Review, ReviewAdmin)
