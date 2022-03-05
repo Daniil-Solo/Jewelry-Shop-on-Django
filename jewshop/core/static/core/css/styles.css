@@ -72,7 +72,66 @@ li{
     padding: 0px;
     font-size: 20px;
 }
+/*---------  Главная  ---------*/
+section#news{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#news h6{
+    margin: 5px 0px 20px 0px;
+}
+#news .card-item {
+    padding: 15px;
+}
+#news .card-footer{
+    border-top: 0px;
+    background: white;
+}
+#news .card-img-top {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
 
+section#reviews{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#reviews h6{
+    margin: 5px 0px 20px 0px;
+}
+#reviews .card {
+    margin: 0 0.5em;
+    border: none;
+}
+#reviews .carousel-control-prev,
+#reviews .carousel-control-next {
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+@media (min-width: 768px) {
+  .carousel-item {
+    margin-right: 0;
+    flex: 0 0 25%;
+    display: block;
+  }
+  .carousel-inner {
+    display: flex;
+  }
+}
+@media (max-width: 765px) {
+  .carousel-item {
+    margin-right: 0;
+    flex: 0 0 50%;
+    display: block;
+  }
+  .carousel-inner {
+    display: flex;
+  }
+}
 /*---------  Каталог  ---------*/
 section#catalog{
     margin-top: 50px;
