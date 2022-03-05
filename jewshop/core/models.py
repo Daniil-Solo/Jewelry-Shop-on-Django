@@ -29,6 +29,7 @@ class Jewelry(models.Model):
     )
 
     price = models.FloatField(verbose_name="цена")
+    quantity = models.PositiveSmallIntegerField(verbose_name="количество", default=1)
     weight = models.FloatField(null=True, blank=True, verbose_name="вес")
     length = models.FloatField(null=True, blank=True, verbose_name="длина")
     width = models.FloatField(null=True, blank=True, verbose_name="ширина")
