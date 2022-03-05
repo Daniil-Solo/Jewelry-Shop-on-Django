@@ -8,6 +8,7 @@ class JewelryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     list_editable = ("title", "is_in_stock", "price")
     list_filter = ("is_in_stock", "jew_cat", "material_cats", "metal_cat")
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class GalleryAdmin(admin.ModelAdmin):
@@ -18,18 +19,21 @@ class GalleryAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "title", 'slug')
     list_editable = ('title', 'slug')
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class MaterialAdmin(admin.ModelAdmin):
     list_display = ("id", "title", 'slug', "image", "description")
     search_fields = ('title', 'description')
     list_editable = ('title', 'slug')
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class MetalAdmin(admin.ModelAdmin):
     list_display = ("id", "title", 'slug')
     search_fields = ('title',)
     list_editable = ('title', 'slug')
+    prepopulated_fields = {'slug': ('title',)}
 
 
 class ReviewAdmin(admin.ModelAdmin):
