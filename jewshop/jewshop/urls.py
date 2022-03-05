@@ -5,7 +5,8 @@ from .settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("core.urls"))
+    path('cart/', include("cart.urls")),
+    path('', include("core.urls")),
 ]
 
 if DEBUG:
