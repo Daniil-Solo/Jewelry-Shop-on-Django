@@ -1,3 +1,4 @@
+from django.core.validators import MaxValueValidator
 from django.db import models
 from django.urls import reverse
 
@@ -98,3 +99,26 @@ class Metal(models.Model):
         verbose_name = "Фурнитура"
         verbose_name_plural = "Фурнитура"
         ordering = ["title"]
+
+
+class Review(models.Model):
+    title = models.CharField(max_length=50, verbose_name="название")
+    stars = models.PositiveSmallIntegerField(
+        verbose_name="оценка",
+        validators=(
+            MaxValueValidator(
+                limit_value=5
+            ),
+        ),
+        default=5,
+    )
+    text = models.TextField(null=True, blank=True, verbose_name='текст')
+    date_create = models.DateField(auto_now_add=True, verbose_name="дата создания")
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+        ordering = ["-date_create"]
+
+    def __str__(self):
+        return "Отзыв от клиента " + str(self.title)
