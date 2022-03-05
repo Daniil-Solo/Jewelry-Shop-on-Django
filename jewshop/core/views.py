@@ -5,6 +5,17 @@ from .utils import *
 from django.db.models import Min, Max
 
 
+class Home(MenuMixin, TemplateView):
+    template_name = "core/home.html"
+
+    def get_context_data(self, *args, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["jewelries"] = Jewelry.objects.filter(is_in_stock=1).order_by("-date_edit")[:3]
+        context["reviews"] = [dict(title=f"review_{i}", text="i"*100) for i in range(10)]
+        menu_context = self.get_menu_context_data(title="Главная")
+        return {**context, **menu_context}
+
+
 class JewelryView(MenuMixin, DetailView):
     model = Jewelry
     template_name = "core/jewelry_view.html"
