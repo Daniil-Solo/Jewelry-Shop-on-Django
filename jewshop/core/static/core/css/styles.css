@@ -104,6 +104,13 @@ section#reviews{
     margin: 0 0.5em;
     border: none;
 }
+#reviews .card-footer{
+    border-top: 0px;
+    padding: 5px;
+}
+#reviews .card-body{
+    padding: 5px;
+}
 #reviews .carousel-control-prev,
 #reviews .carousel-control-next {
     width: 6vh;
