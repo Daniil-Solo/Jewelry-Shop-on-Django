@@ -35,7 +35,7 @@
                             <h5>Категории</h5>
                             <ul>
                                 {% for cat in categories %}
-                                <li">
+                                <li>
                                     {% if cat.slug in old_filters.category %}
                                     <input checked type="checkbox" name="category" value="{{cat.slug}}">
                                     {% else %}
@@ -95,7 +95,9 @@
                     {% for jew in jewelries %}
                     <div class="card-item col-12 col-lg-4 col-md-6">
                         <div class="card h-100">
-                            <img src="{{jew.main_photo.url}}" class="card-img-top" alt="фото украшения">
+                            <a href="{{ jew.get_absolute_url }}">
+                                <img src="{{jew.main_photo.url}}" class="card-img-top" alt="фото украшения">
+                            </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title title-gray">{{jew.title}}</h5>
                             </div>
