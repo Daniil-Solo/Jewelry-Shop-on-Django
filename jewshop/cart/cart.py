@@ -52,7 +52,7 @@ class Cart(object):
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):
-        return sum(item['price'] * item['quantity'] for item in self.cart.values())
+        return sum(float(item['price']) * item['quantity'] for item in self.cart.values())
 
     def clear(self):
         del self.session[CART_SESSION_ID]
