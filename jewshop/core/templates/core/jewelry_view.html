@@ -4,7 +4,7 @@
 {% block maincontent %}
 <section id="view">
     <div class="row">
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-5 col-md-12">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -32,7 +32,7 @@
               </button>
             </div>
          </div>
-        <div class="col-lg-6 col-md-12">
+        <div class="col-lg-7 col-md-12">
             <div class="tags">
                 <h4>
                     {% if jew.is_in_stock %}
@@ -49,6 +49,15 @@
             </div>
             <div class="price">
                 <h5 class="display-5 price-gray">{{jew.price|floatformat:"0"}} ₽</h5>
+                {% if jew.is_in_stock %}
+                <form action='{% url "cart_add" jew.slug %}' method="post">
+                    {% csrf_token %}
+                    <div class="row" >
+                        <div class="col-lg-1 col-sm-2 col-form">{{add_product_form.quantity}}</div>
+                        <div class="col-lg-11 col-sm-10 col-form"><input class="btn btn-small btn-detail pretty-green without_box" type="submit" value="Добавить в корзину {% for item in cart %}{% if item.product.slug == jew.slug %}({{item.quantity}}){% endif %}{% endfor %}"></div>
+                    </div>
+                </form>
+                {% endif %}
             </div>
             <div>
                 <ul class="nav pretty-green" id="myTab" role="tablist">

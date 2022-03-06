@@ -216,3 +216,12 @@ section#view{
 #view .tab-pane{
     padding: 10px 10px 0px 10px;
 }
+#view #quantity_select{
+    border-style: none;
+    box-shadow: none;
+    padding: 5px;
+    font-size: 20px;
+}
+#view .col-form{
+    padding: 5px 0px;
+}
