@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from django.views.generic import ListView, DetailView, TemplateView
 from .models import *
 from .utils import *
 from django.db.models import Min, Max
+from cart.forms import CartAddJewelryForm
 
 
 class Home(MenuMixin, TemplateView):
@@ -32,6 +32,7 @@ class JewelryView(MenuMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["image_links"] = [gallery.image.url for gallery in context["jew"].images.all()]
         menu_context = self.get_menu_context_data(title="Украшение")
+        context["add_product_form"] = CartAddJewelryForm().set_choices(context["jew"].quantity)
         return {**context, **menu_context}
 
 
