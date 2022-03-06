@@ -1,0 +1,48 @@
+{% extends "core/content.html"%}
+{% block maincontent %}
+<section id="cart" style="margin: 50px 0px;">
+    <div class="container-fluid">
+        <h3>Корзина</h3>
+        {% if cart %}
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Изображение</th>
+                    <th scope="col">Количество</th>
+                    <th scope="col">Стоимость</th>
+                    <th scope="col">Цена</th>
+                    <th scope="col">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for item in cart %}
+                <tr>
+                    <th scope="row">{{item.product.title}}</th>
+                    <td><img src="{{item.product.main_photo.url}}" style="width: 75px; height: 100%; object-fit: cover;"></td>
+                    <td>{{item.quantity}}</td>
+                    <td>{{item.price|floatformat:"0"}}₽</td>
+                    <td>{{item.total_price|floatformat:"0"}}₽</td>
+                    <td>
+                        <a class="btn btn-underline without_box" href='{% url "jewelries" item.product.slug %}' style="background: #afd5ce; color:white;">
+                            Добавить
+                        </a>
+                        <a class="btn btn-underline without_box" href='{% url "cart_remove" item.product.slug %}' style="background: #fbc8c1; color:white;">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            <b>Итого</b> {{cart.get_total_price|floatformat:"0"}}₽
+        </p>
+        {% else %}
+        <p>
+            <b>Пока товаров нет</b>
+        </p>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
