@@ -35,6 +35,5 @@ class CartView(MenuMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["cart"] = Cart(self.request)
         menu_context = self.get_menu_context_data(title="Корзина")
         return {**context, **menu_context}
