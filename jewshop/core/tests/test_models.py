@@ -2,7 +2,7 @@ import tempfile
 from django.db import IntegrityError
 from django.test import Client, TestCase
 from django.urls import reverse
-from ..models import Metal, Material
+from ..models import Metal, Material, Category
 
 
 class Settings(TestCase):
@@ -18,6 +18,10 @@ class Settings(TestCase):
             slug="test_material_slug",
             image=tempfile.NamedTemporaryFile(suffix='.jpg').name,
             description="test_material_description"
+        )
+        cls.category = Category.objects.create(
+            title="test_category",
+            slug="test_category_slug",
         )
 
 
@@ -66,3 +70,23 @@ class MaterialTestCase(Settings):
         )
         with self.assertRaises(IntegrityError):
             material_with_duplicated_slug.save()
+
+
+class CategoryTestCase(Settings):
+    def test_model_parameters(self):
+        self.assertEqual(self.category._meta.get_field("title").max_length, 50)
+        self.assertEqual(self.category._meta.get_field("title").verbose_name, "название")
+        self.assertEqual(self.category._meta.get_field("slug").max_length, 50)
+        self.assertEqual(self.category._meta.get_field("slug").verbose_name, "слаг")
+
+    def test_successful_creating(self):
+        self.assertEqual(self.category.title, "test_category")
+        self.assertEqual(self.category.slug, "test_category_slug")
+
+    def test_unsuccessful_creating(self):
+        category_with_duplicated_slug = Category(
+            title="test_category",
+            slug="test_category_slug",
+        )
+        with self.assertRaises(IntegrityError):
+            category_with_duplicated_slug.save()
