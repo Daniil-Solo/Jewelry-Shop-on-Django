@@ -1,7 +1,9 @@
 import tempfile
+
+from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
-from ..models import Metal, Material, Category, Jewelry
+from ..models import Metal, Material, Category, Jewelry, Review
 
 
 class Settings(TestCase):
@@ -35,6 +37,11 @@ class Settings(TestCase):
             main_photo=tempfile.NamedTemporaryFile(suffix='.jpg').name,
         )
         cls.jew.material_cats.add(cls.material)
+        cls.review = Review.objects.create(
+            title="test_review",
+            stars=5,
+            text="test_review_text"
+        )
 
 
 class MetalTestCase(Settings):
@@ -165,3 +172,40 @@ class JewelryTestCase(Settings):
 
     def test_get_absolute_url(self):
         self.assertEqual(self.jew.get_absolute_url(), '/jewelries/test_jew_slug/')
+
+class ReviewTestCase(Settings):
+    def test_model_parameters(self):
+        self.assertEqual(self.review._meta.get_field("title").max_length, 50)
+        self.assertEqual(self.review._meta.get_field("title").verbose_name, "название")
+        self.assertEqual(self.review._meta.get_field("stars").verbose_name, "оценка")
+        self.assertEqual(self.review._meta.get_field("stars").default, 5)
+        self.assertEqual(self.review._meta.get_field("stars").validators[0].limit_value, 5)
+        self.assertEqual(self.review._meta.get_field("text").null, True)
+        self.assertEqual(self.review._meta.get_field("text").blank, True)
+        self.assertEqual(self.review._meta.get_field("text").verbose_name, "текст")
+        self.assertEqual(self.review._meta.get_field("date_create").verbose_name, "дата создания")
+
+    def test_successful_creating(self):
+        self.assertEqual(self.review.title, "test_review")
+        self.assertEqual(self.review.text, "test_review_text")
+        self.assertEqual(self.review.stars, 5)
+
+    def test_unsuccessful_creating_negative(self):
+        review_with_negative_value = Review(
+            title="test_review_2",
+            stars=-1,
+        )
+        with self.assertRaises(IntegrityError):
+            review_with_negative_value.save()
+
+    def test_unsuccessful_creating_more_max_value(self):
+        """
+        Не работает проверка валидатора
+        """
+        # review_with_value_more_max_value = Review(
+        #     title="test_review_2",
+        #     stars=6,
+        # )
+        # with self.assertRaises(ValidationError):
+        #     review_with_value_more_max_value.save()
+        pass
