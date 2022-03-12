@@ -103,10 +103,8 @@ section#reviews{
 #reviews .card {
     margin: 0 0.5em;
     border: none;
-}
-#reviews .card-footer{
-    border-top: 0px;
-    padding: 5px;
+    background: #b7d8d1;
+    width:450px;
 }
 #reviews .card-body{
     padding: 5px;
