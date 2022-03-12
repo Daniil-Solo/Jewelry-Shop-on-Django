@@ -10,17 +10,14 @@ class Cart(object):
             cart = self.session[CART_SESSION_ID] = {}
         self.cart = cart
 
-    def add(self, jewelry, quantity=1, update_quantity=False):
+    def add(self, jewelry):
         jewelry_slug = jewelry.slug
         if jewelry_slug not in self.cart:
             self.cart[jewelry_slug] = {
                 'quantity': 0,
-                'price': str(jewelry.price)
+                'price': jewelry.price
             }
-        if update_quantity:
-            self.cart[jewelry_slug]['quantity'] = quantity
-        else:
-            self.cart[jewelry_slug]['quantity'] += quantity
+        self.cart[jewelry_slug]['quantity'] += 1
         self.save()
 
     def save(self):
@@ -52,7 +49,14 @@ class Cart(object):
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):
-        return sum(float(item['price']) * item['quantity'] for item in self.cart.values())
+        return sum(item['price'] * item['quantity'] for item in self.cart.values())
+
+    def get_current_quantity(self, jewelry):
+        jewelry_slug = jewelry.slug
+        if jewelry_slug in self.cart:
+            return self.cart[jewelry_slug]["quantity"]
+        else:
+            return 0
 
     def clear(self):
         del self.session[CART_SESSION_ID]

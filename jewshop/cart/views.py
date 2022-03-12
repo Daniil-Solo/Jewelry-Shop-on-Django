@@ -3,24 +3,16 @@ from django.views.decorators.http import require_POST
 from core.models import Jewelry
 from django.views.generic import TemplateView
 from .cart import Cart
-from .forms import CartAddJewelryForm
 from core.utils import MenuMixin
 
 
-@require_POST
 def cart_add(request, jew_slug):
     cart = Cart(request)
     jewelry = get_object_or_404(Jewelry, slug=jew_slug)
-    form = CartAddJewelryForm(request.POST)
-    form.set_choices(jewelry.quantity)
-    if form.is_valid():
-        cd = form.cleaned_data
-        cart.add(
-            jewelry=jewelry,
-            quantity=cd['quantity'],
-            update_quantity=cd['update']
-        )
-    return redirect('cart')
+    current_quantity = cart.get_current_quantity(jewelry)
+    if not current_quantity or current_quantity < jewelry.quantity:
+        cart.add(jewelry=jewelry)
+    return redirect('jewelries', jew_slug)
 
 
 def cart_remove(request, jew_slug):
