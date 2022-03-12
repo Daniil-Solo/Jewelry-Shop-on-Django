@@ -8,21 +8,23 @@ class MenuMixin:
         context["footer"] = [
             dict(title="Покупателям",
                  sub_items=[
-                     dict(title="Доставка", url=reverse("catalog")),
-                     dict(title="Оплата", url=reverse("catalog")),
-                     dict(title="Уход", url=reverse("catalog")),
+                     dict(title="Новинки", url=reverse("home")+"#news", target="self"),
+                     dict(title="Доставка", url=reverse("catalog"), target="self"),
+                     dict(title="Оплата", url=reverse("catalog"), target="self"),
+                     dict(title="Уход", url=reverse("catalog"), target="self"),
                     ]
                  ),
             dict(title="Информация",
                  sub_items=[
-                     dict(title="О нас", url=reverse("catalog")),
+                     dict(title="О нас", url=reverse("catalog"), target="self"),
+                     dict(title="Отзывы", url=reverse("home")+"#reviews", target="self"),
                     ]
                  ),
             dict(title="Контакты",
                  sub_items=[
-                     dict(title="Вконтакте", url="https://vk.com/fragilemystery"),
-                     dict(title="Instagram", url="https://www.instagram.com/fragilemystery/"),
-                     dict(title="Telegram", url="https://t.me/fragilemystery"),
+                     dict(title="Вконтакте", url="https://vk.com/fragilemystery", target="blank"),
+                     dict(title="Instagram", url="https://www.instagram.com/fragilemystery/", target="blank"),
+                     dict(title="Telegram", url="https://t.me/fragilemystery", target="blank"),
                     ]
                  ),
         ]
