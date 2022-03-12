@@ -38,7 +38,7 @@
                     {% if jew.is_in_stock %}
                     <span class="badge tag pretty-green">В наличии</span>
                     {% endif %}
-                    <span class="badge tag pretty-green">{{jew.metal_cat}}</span>
+                    <span class="badge tag pretty-green">{{jew.metal_cat|capfirst}}</span>
                     {% for material in jew.material_cats.all %}
                         <span class="badge tag pretty-green">{{material|capfirst}}</span>
                     {% endfor %}
@@ -50,13 +50,43 @@
             <div class="price">
                 <h5 class="display-5 price-gray">{{jew.price|floatformat:"0"}} ₽</h5>
                 {% if jew.is_in_stock %}
-                <form action='{% url "cart_add" jew.slug %}' method="post">
-                    {% csrf_token %}
-                    <div class="row" >
-                        <div class="col-lg-1 col-sm-2 col-form">{{add_product_form.quantity}}</div>
-                        <div class="col-lg-11 col-sm-10 col-form"><input class="btn btn-small btn-detail pretty-green without_box" type="submit" value="Добавить в корзину {% for item in cart %}{% if item.product.slug == jew.slug %}({{item.quantity}}){% endif %}{% endfor %}"></div>
-                    </div>
-                </form>
+                    {% if remain != 0 %}
+                        {% if in_cart == 0 %}
+                            <p>
+                                В наличии {{jew.quantity}} шт.
+                            </p>
+                        {% else %}
+                            <p>
+                                В корзине сейчас {{in_cart}} шт. (доступно ещё {{remain}} шт.)
+                            </p>
+                        {% endif %}
+                        <a class="btn btn-small btn-detail pretty-green without_box" href='{% url "cart_add" jew.slug %}'>
+                            Добавить в корзину
+                        </a>
+                        {% if in_cart >= 1 %}
+                            <a class="btn btn-small btn-detail pretty-green without_box" href='{% url "cart" %}'>
+                                Перейти к корзине
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        <p>
+                            В корзине сейчас {{in_cart}} шт. (больше не осталось)
+                        </p>
+                        <a class="btn btn-small btn-detail pretty-green without_box" href='{% url "cart" %}'>
+                            Перейти к корзине
+                        </a>
+                    {% endif %}
+                {% else %}
+                    <p>
+                        Понравилось украшение? К сожалению, сейчас его нет в наличии, но я могу сделать его на заказ
+                        <br>
+                        Мои контакты ниже
+                    </p>
+                    {% for sub_item in footer.2.sub_items %}
+                        <a class="btn btn-underline pretty-green without_box" href="{{ sub_item.url }}" target="{{sub_item.target}}">
+                            {{sub_item.title}}
+                        </a>
+                    {% endfor %}
                 {% endif %}
             </div>
             <div>
