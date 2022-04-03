@@ -1,4 +1,4 @@
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse
 
@@ -104,11 +104,14 @@ class Metal(models.Model):
 
 class Review(models.Model):
     title = models.CharField(max_length=50, verbose_name="название")
-    stars = models.PositiveSmallIntegerField(
+    stars = models.SmallIntegerField(
         verbose_name="оценка",
         validators=(
             MaxValueValidator(
                 limit_value=5
+            ),
+            MinValueValidator(
+                limit_value=1
             ),
         ),
         default=5,
