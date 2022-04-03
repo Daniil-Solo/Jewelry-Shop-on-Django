@@ -223,3 +223,39 @@ section#view{
 #view .col-form{
     padding: 5px 0px;
 }
+/*------------------Авторизация--------------*/
+#auth .email_field{
+    border: 0px;
+    border-radius: 0px;
+    border-bottom: 2px solid #5DB4A3;
+}
+#container-auth{
+    margin: auto;
+}
+#auth h2{
+    margin: 100px 0px;
+    color: #5DB4A3;
+    text-align: center;
+}
+#auth h3{
+    margin: 20px 0px;
+    text-align: center;
+}
+@media (max-width: 450px) {
+    #container-auth{
+        width: 95%;
+    }
+}
+@media (max-width: 650px) and (min-width: 450px){
+    #container-auth{
+        width: 70%;
+    }
+}
+@media (min-width: 650px) {
+    #container-auth{
+        width: 50%;
+    }
+}
+#auth .errorlist{
+    color: red;
+}
