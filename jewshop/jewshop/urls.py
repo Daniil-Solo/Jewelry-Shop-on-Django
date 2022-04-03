@@ -6,6 +6,7 @@ from .settings import DEBUG, MEDIA_URL, MEDIA_ROOT
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/', include("cart.urls")),
+    path('auth/', include("authorization.urls")),
     path('', include("core.urls")),
 ]
 

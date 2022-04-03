@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'cart.apps.CartConfig',
     'core.apps.CoreConfig',
+    'authorization.apps.AuthorizationConfig',
 ]
 
 MIDDLEWARE = [
