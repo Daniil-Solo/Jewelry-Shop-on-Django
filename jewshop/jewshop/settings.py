@@ -30,6 +30,10 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+AUTH_USER_MODEL = 'users.User'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,7 +46,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'cart.apps.CartConfig',
     'core.apps.CoreConfig',
-    'authorization.apps.AuthorizationConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
