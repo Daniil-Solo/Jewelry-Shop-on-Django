@@ -224,7 +224,7 @@ section#view{
     padding: 5px 0px;
 }
 /*------------------Авторизация--------------*/
-#auth .email_field{
+#auth .item_field{
     border: 0px;
     border-radius: 0px;
     border-bottom: 2px solid #5DB4A3;
@@ -258,4 +258,8 @@ section#view{
 }
 #auth .errorlist{
     color: red;
+}
+#auth a{
+    color: #268371;
+    text-decoration:none;
 }

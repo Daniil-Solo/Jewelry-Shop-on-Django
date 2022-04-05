@@ -1,0 +1,18 @@
+{% extends "core/content.html"%}
+{% block content %}
+<section id="auth" style="margin: 50px 0px;">
+    <div id="container-auth">
+        <a href="{% url 'home' %}"><h2>Fragile Mystery</h2></a>
+        <h3>
+          {% block message-title %}
+          {% endblock message-title %}
+        </h3>
+        <div style="margin: 0px; 0px;">
+            <div style="padding: 40px; border: solid 1px #5DB4A3;">
+                {% block message-body %}
+                {% endblock message-body %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
