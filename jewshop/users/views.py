@@ -1,11 +1,28 @@
 from django.contrib.auth import login, get_user_model
-from django.contrib.auth.views import LoginView as DjangoLoginView
+from django.contrib.auth.views import (
+    LoginView as DjangoLoginView,
+    PasswordResetView as DjangoPasswordResetView,
+    PasswordResetConfirmView as DjangoPasswordResetConfirmView
+)
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.views import View
 
-from .forms import LoginForm, RegistrationForm
+from .forms import LoginForm, RegistrationForm, PasswordResetForm, SetPasswordForm
 User = get_user_model()
+
+
+class PasswordResetConfirmView(DjangoPasswordResetConfirmView):
+    template_name = "password/password_reset_confirm.html"
+    form_class = SetPasswordForm
+
+
+class PasswordResetView(DjangoPasswordResetView):
+    template_name = "password/password_reset_form.html"
+    form_class = PasswordResetForm
+    email_template_name = "password/password_reset_email.html"
+    title = "Восстановление пароля"
+    subject_template_name = "password/password_reset_subject.txt"
 
 
 class LoginView(DjangoLoginView):
