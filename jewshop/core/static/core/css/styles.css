@@ -223,6 +223,26 @@ section#view{
 #view .col-form{
     padding: 5px 0px;
 }
+/*------------------Поиск--------------*/
+section#search{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+#search h3{
+    margin: 5px 0px 20px 0px;
+}
+#search .card-item {
+    padding: 15px;
+}
+#search .card-footer{
+    border-top: 0px;
+    background: white;
+}
+#search .card-img-top {
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
 /*------------------Авторизация--------------*/
 #auth .item_field{
     border: 0px;
