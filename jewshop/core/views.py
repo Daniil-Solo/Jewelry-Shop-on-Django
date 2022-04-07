@@ -47,8 +47,8 @@ class JewelryCatalog(MenuMixin, ListView):
         context = super().get_context_data(**kwargs)
         menu_context = self.get_menu_context_data(title="Каталог")
         prices = Jewelry.objects.aggregate(min=Min("price"), max=Max("price"))
-        context["min_price"] = prices.get("min")
-        context["max_price"] = prices.get("max")
+        context["min_price"] = prices.get("min") or 0
+        context["max_price"] = prices.get("max") or 0
         context["categories"] = Category.objects.values("title", "slug")
         context["metals"] = Metal.objects.values("title", "slug")
         context["materials"] = Material.objects.values("title", "slug")
