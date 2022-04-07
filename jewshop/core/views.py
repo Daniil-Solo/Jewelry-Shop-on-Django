@@ -5,6 +5,21 @@ from django.db.models import Min, Max
 from cart.cart import Cart
 
 
+class Search(MenuMixin, ListView):
+    model = Jewelry
+    template_name = "core/jewelry_search.html"
+    context_object_name = "jewelries"
+
+    def get_queryset(self):
+        return Jewelry.objects.filter(title__icontains=self.request.GET.get('q'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        menu_context = self.get_menu_context_data(title="Поиск украшений")
+        context["q"] = self.request.GET.get('q')
+        return {**context, **menu_context}
+
+
 class Home(MenuMixin, TemplateView):
     template_name = "core/home.html"
 
