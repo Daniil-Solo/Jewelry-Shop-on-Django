@@ -37,6 +37,7 @@
         </table>
         <p>
             <b>Итого</b> {{cart.get_total_price|floatformat:"0"}}₽
+            <a href="{% url 'login' %}" class="btn btn-detail pretty-green without_box" style="margin-left: 20px;">Перейти к оплате</a>
         </p>
         {% else %}
         <p>
