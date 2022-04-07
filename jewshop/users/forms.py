@@ -4,12 +4,19 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.forms import (
     PasswordResetForm as DjangoPasswordResetForm,
     SetPasswordForm as DjangoSetPasswordForm,
+    PasswordChangeForm as DjangoPasswordChangeForm
 )
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
 
 class SetPasswordForm(DjangoSetPasswordForm):
+
+    error_messages = {
+        "password_mismatch": "Введенные пароли не совпадают",
+    }
+
     def __init__(self, user, *args, **kwargs):
         self.user = user
         super().__init__(user, *args, **kwargs)
@@ -27,6 +34,36 @@ class SetPasswordForm(DjangoSetPasswordForm):
                 'type': 'password'
             },
         )
+
+
+class PasswordChangeForm(SetPasswordForm):
+    error_messages = {
+        **SetPasswordForm.error_messages,
+        "password_incorrect": "Ваш старый пароль введен неверно. Пожалуйста попробуйте снова"
+    }
+
+    old_password = forms.CharField(
+        label="Old password",
+        strip=False,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'item_field without_box form-control',
+                'placeholder': 'Старый пароль...',
+                'type': 'password'
+            }
+        ),
+    )
+
+    field_order = ["old_password", "new_password1", "new_password2"]
+
+    def clean_old_password(self):
+        old_password = self.cleaned_data["old_password"]
+        if not self.user.check_password(old_password):
+            raise ValidationError(
+                self.error_messages["password_incorrect"],
+                code="password_incorrect",
+            )
+        return old_password
 
 
 class PasswordResetForm(DjangoPasswordResetForm):

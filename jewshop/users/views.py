@@ -2,14 +2,20 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth.views import (
     LoginView as DjangoLoginView,
     PasswordResetView as DjangoPasswordResetView,
-    PasswordResetConfirmView as DjangoPasswordResetConfirmView
+    PasswordResetConfirmView as DjangoPasswordResetConfirmView,
+    PasswordChangeView as DjangoPasswordChangeView
 )
 from django.db import IntegrityError
 from django.shortcuts import render, redirect
 from django.views import View
 
-from .forms import LoginForm, RegistrationForm, PasswordResetForm, SetPasswordForm
+from .forms import LoginForm, RegistrationForm, PasswordResetForm, SetPasswordForm, PasswordChangeForm
 User = get_user_model()
+
+
+class PasswordChangeView(DjangoPasswordChangeView):
+    template_name = "password/password_change_form.html"
+    form_class = PasswordChangeForm
 
 
 class PasswordResetConfirmView(DjangoPasswordResetConfirmView):
