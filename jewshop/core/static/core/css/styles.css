@@ -283,3 +283,19 @@ section#search{
     color: #268371;
     text-decoration:none;
 }
+/*----------------Заказ-------------------*/
+section#order{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+#order .errorlist{
+    color: red;
+}
+#order .item_field{
+    border: 0px;
+    border-radius: 0px;
+    border-bottom: 2px solid #5DB4A3;
+}
+#order .order-col{
+    margin: 20px 0px;
+}
