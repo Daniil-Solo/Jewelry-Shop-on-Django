@@ -2,7 +2,7 @@
 {% block maincontent %}
 <section id="cart" style="margin: 50px 0px;">
     <div class="container-fluid">
-        <h3>Корзина</h3>
+        <h6 class="text-center display-6">Корзина</h6>
         {% if cart %}
         <table class="table">
             <thead class="table-light">
@@ -37,7 +37,7 @@
         </table>
         <p>
             <b>Итого</b> {{cart.get_total_price|floatformat:"0"}}₽
-            <a href="{% url 'login' %}" class="btn btn-detail pretty-green without_box" style="margin-left: 20px;">Перейти к оплате</a>
+            <a href="{% url 'create_order' %}" class="btn btn-detail pretty-green without_box" style="margin-left: 20px;">Перейти к оформлению</a>
         </p>
         {% else %}
         <p>
