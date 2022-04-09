@@ -20,53 +20,62 @@
 </header>
 
 <nav class="navbar navbar-expand-lg navbar-light pretty-green sticky-top" id="menu">
-  <div class="container-fluid">
-    <button class="navbar-toggler dark-green without_box btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <div class="container">
-          <ul class="navbar-nav nav-pills nav-fill">
-            <li class="nav-item dark-green">
-                <a class="btn btn-underline dark-green without_box" href="{% url 'home' %}">Главная</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-underline pretty-green without_box" href="{% url 'catalog' %}">Каталог</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-underline pretty-green without_box" href="#">Оплата</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-underline pretty-green without_box" href="#">Доставка</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-underline pretty-green without_box" href="#">О нас</a>
-            </li>
-            <li class="nav-item">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
+    <div class="container-fluid">
+        <button class="navbar-toggler dark-green without_box btn-collapse" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <div class="container">
+            <ul class="navbar-nav nav-pills nav-fill">
+                <li class="rounded nav-item dark-green">
+                    <a class="btn btn-underline dark-green without_box" href="{% url 'home' %}">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-underline pretty-green without_box" href="{% url 'catalog' %}">Каталог</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-underline pretty-green without_box" href="#">Оплата</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-underline pretty-green without_box" href="#">Доставка</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-underline pretty-green without_box" href="#">О нас</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
                         <a class="btn pretty-green without_box" href="#">
                             <svg width="16" height="16" fill="white">
                               <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                             </svg>
                         </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn pretty-green without_box" href="#">
-                            <svg width="16" height="16" fill="white">
-                              <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                            </svg>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn pretty-green without_box" href="{% url 'cart' %}">
-                            <svg width="16" height="16" fill="white">
-                              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn pretty-green without_box" href="#">
+                                <svg width="16" height="16" fill="white">
+                                    <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn pretty-green without_box" href="{% url 'cart' %}">
+                                <svg width="16" height="16" fill="white">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="btn btn-underline pretty-green without_box" href="{% url 'login' %}">Войти</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-underline pretty-green without_box" href="{% url 'register' %}">Регистрация</a>
+                </li>
+                {% endif %}
           </ul>
       </div>
     </div>
