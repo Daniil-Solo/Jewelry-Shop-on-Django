@@ -10,6 +10,26 @@ from cart.cart import Cart
 from core.views import MenuMixin
 
 
+def check_order(request):
+    cart = Cart(request)
+    cart.set_forced_to_update(False)
+    for item in cart:
+        product = item["product"]
+        quantity = item["quantity"]
+        real_quantity = product.quantity
+        if quantity > real_quantity:
+            cart.set_forced_to_update(True)
+            print(real_quantity)
+            if real_quantity == 0:
+                cart.remove(product)
+            else:
+                cart.set_quantity(product, real_quantity)
+    if cart.forced_to_update():
+        return redirect('cart')
+    else:
+        return redirect('create_order')
+
+
 class CreateOrderDoneView(MenuMixin, TemplateView):
     template_name = 'order/create_order_done.html'
 
@@ -38,4 +58,7 @@ class CreateOrderView(MenuMixin, CreateView):
             quantity = item["quantity"]
             price = item["price"]
             OrderItem.objects.create(order=self.object, product=product, quantity=quantity, price=price)
+            product.quantity = product.quantity - quantity
+            product.save()
+        cart.clear()
         return HttpResponseRedirect(self.get_success_url())
