@@ -1,0 +1,15 @@
+{% extends 'core/content.html'%}
+
+{% block maincontent %}
+<section id="order-complete">
+    <div class="container">
+        <h6 class="text-center display-6">Спасибо за заказ!</h6>
+        <p class="text-center mt-4">
+            Заказ успешно оформлен! Номер вашего заказа — <i>{{order_number}}</i>
+        </p>
+        <p class="text-center">
+            В ближайшее время с вами свяжется наш менеджер по указанным контактам
+        </p>
+    </div>
+</section>
+{% endblock %}

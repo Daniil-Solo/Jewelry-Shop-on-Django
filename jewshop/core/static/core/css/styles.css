@@ -284,7 +284,7 @@ section#search{
     text-decoration:none;
 }
 /*----------------Заказ-------------------*/
-section#order{
+section#order-complete, section#order{
     margin-top: 50px;
     margin-bottom: 100px;
 }
