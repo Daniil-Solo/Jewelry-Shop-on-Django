@@ -5,7 +5,7 @@ from core.models import Jewelry
 class Order(models.Model):
     full_name = models.CharField(max_length=250, verbose_name="ФИО")
     email = models.EmailField(verbose_name="Электронная почта")
-    phone = models.CharField(verbose_name="Телефон")
+    phone = models.CharField(max_length=15, verbose_name="Телефон")
     city = models.CharField(max_length=100, verbose_name="Город")
     address = models.CharField(max_length=250, verbose_name="Адрес")
     postal_code = models.CharField(max_length=20, verbose_name="Почтовый индекс")
@@ -19,7 +19,7 @@ class Order(models.Model):
         verbose_name_plural = 'Заказы'
 
     def __str__(self):
-        return f"Заказ {self.pk}"
+        return f"{self.pk}"
 
 
 class OrderItem(models.Model):
