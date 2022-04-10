@@ -7,11 +7,12 @@ class OrderItemInline(admin.TabularInline):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['full_name', 'email',
+    list_display = ['pk', 'full_name', 'email',
                     'city', 'address', 'postal_code',
                     'created', 'paid', 'sent']
     list_filter = ['paid', 'sent', 'created']
     inlines = [OrderItemInline]
+    ordering = ('-created', )
 
 
 admin.site.register(Order, OrderAdmin)

@@ -14,7 +14,7 @@ class Order(models.Model):
     sent = models.BooleanField(default=False, verbose_name="Отправлено")
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ('created',)
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
