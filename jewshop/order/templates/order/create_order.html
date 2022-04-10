@@ -24,15 +24,18 @@
                         {% for item in cart %}
                             <div class="card-item col-12 col-lg-6">
                                 <div class="card h-100">
-                                    <a href="{{ item.product.get_absolute_url }}">
-                                        <img src="{{item.product.main_photo.url}}" class="card-img-top" alt="фото украшения">
-                                    </a>
-                                    <div class="card-body text-center">
+                                    <img src="{{item.product.main_photo.url}}" class="card-img-top" alt="фото украшения">
+                                    <div class="card-body text-center" style="padding: 4px;">
                                         <p class="card-text title-gray">{{item.product.title}} - {{item.quantity}} шт.</p>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
+                    </div>
+                    <div class="row mt-3 text-center">
+                        <p>
+                            Заказ на сумму {{cart.get_total_price|floatformat:"0"}}₽
+                        </p>
                     </div>
                 </div>
             </div>
