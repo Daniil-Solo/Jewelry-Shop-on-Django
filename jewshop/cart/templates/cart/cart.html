@@ -3,7 +3,14 @@
 <section id="cart" style="margin: 50px 0px;">
     <div class="container-fluid">
         <h6 class="text-center display-6">Корзина</h6>
-        {% if cart %}
+        {% if cart.forced_to_update %}
+        <p class="mt-4">
+            Внимание! Некоторые украшения могли быть удалены из корзины в связи с их отсутствием в наличии
+            <br>
+            Пожалуйста проверьте корзину и можете перейти к оформлению заказа
+        </p>
+        {% endif %}
+        {% if cart.is_not_empty %}
         <table class="table">
             <thead class="table-light">
                 <tr>
@@ -36,8 +43,8 @@
             </tbody>
         </table>
         <p>
-            <b>Итого</b> {{cart.get_total_price|floatformat:"0"}}₽
-            <a href="{% url 'create_order' %}" class="btn btn-detail pretty-green without_box" style="margin-left: 20px;">Перейти к оформлению</a>
+            <b>Итого</b> {{cart.get_total_price|floatformat:"0"}} ₽
+            <a href="{% url 'check_order' %}" class="btn btn-detail pretty-green without_box" style="margin-left: 20px;">Перейти к оформлению</a>
         </p>
         {% else %}
         <p>
