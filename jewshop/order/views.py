@@ -24,7 +24,7 @@ def check_order(request):
                 cart.remove(product)
             else:
                 cart.set_quantity(product, real_quantity)
-    if cart.forced_to_update():
+    if cart.products_updated:
         return redirect('cart')
     else:
         return redirect('create_order')
