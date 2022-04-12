@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Jewelry(models.Model):
     title = models.CharField(max_length=200, verbose_name="заголовок")
-    slug = models.SlugField(unique=True, max_length=100, verbose_name="слаг")
+    slug = models.SlugField(unique=True, max_length=210, verbose_name="слаг")
 
     description = models.TextField(null=True, blank=True, verbose_name="описание")
     extra = models.TextField(null=True, blank=True, verbose_name="дополнительно")
@@ -24,7 +24,7 @@ class Jewelry(models.Model):
     metal_cat = models.ForeignKey(
         to="Metal",
         on_delete=models.SET_DEFAULT,
-        default="Не указана фурнитуры",
+        default="Не указана фурнитура",
         verbose_name="фурнитура"
     )
 

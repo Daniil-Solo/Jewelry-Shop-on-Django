@@ -30,7 +30,7 @@ class Home(MenuMixin, TemplateView):
             .objects
             .only("title", "price", "main_photo", "slug")
             .filter(is_in_stock=1)
-            .order_by("-date_edit")[:3]
+            .order_by("-date_create")[:3]
         )
         context["reviews"] = Review.objects.all()
         menu_context = self.get_menu_context_data(title="Главная")
