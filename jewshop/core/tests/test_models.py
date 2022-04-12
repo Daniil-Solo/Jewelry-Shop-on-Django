@@ -120,7 +120,7 @@ class JewelryTestCase(Settings):
         self.assertEqual(self.jew._meta.get_field("description").verbose_name, "описание")
         self.assertEqual(self.jew._meta.get_field("extra").null, True)
         self.assertEqual(self.jew._meta.get_field("extra").blank, True)
-        self.assertEqual(self.jew._meta.get_field("extra").verbose_name, "описание")
+        self.assertEqual(self.jew._meta.get_field("extra").verbose_name, "дополнительно")
         self.assertEqual(self.jew._meta.get_field("is_in_stock").default, False)
         self.assertEqual(self.jew._meta.get_field("is_in_stock").verbose_name, "в наличии")
         self.assertEqual(self.jew._meta.get_field("jew_cat").default, "Нет категории")

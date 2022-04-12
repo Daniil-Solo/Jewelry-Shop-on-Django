@@ -39,12 +39,10 @@ class CartTests(TestCase):
         self.assertEqual(current_cart, {})
 
     def test_successful_add_jewelry_to_cart(self):
-        response = self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)), {
-            'quantity': 1
-        })
+        response = self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
         current_cart = self.client.session.get("cart")
         self.assertEqual(response.status_code, 302)
-        self.assertEqual(current_cart, {'test_jew_slug': {'price': '100.0', 'quantity': 1}})
+        self.assertEqual(current_cart, {'test_jew_slug': {'price': 100.0, 'quantity': 1}})
 
     def test_successful_remove_jewelry_from_cart(self):
         self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)), {
@@ -63,29 +61,22 @@ class CartTests(TestCase):
 
     def test_cart_with_one_jewelry(self):
         old_price = self.jew.price
-        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)), {
-            'quantity': 3
-        })
-        new_price = 200
+        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
+        new_price = 200.0
         self.jew.price = new_price
         self.jew.save()
-        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)), {
-            'quantity': 2
-        })
+        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
         self.client.get(reverse('cart'))
         cart = Cart(RequestRecord(session=self.client.session))
         some_jew_in_cart = list(cart)[0]
-        self.assertEqual(some_jew_in_cart.get("quantity"), 5)
+        self.assertEqual(some_jew_in_cart.get("quantity"), 2)
         self.assertEqual(some_jew_in_cart.get("price"), old_price)
-        self.assertEqual(some_jew_in_cart.get("total_price"), 5 * old_price)
+        self.assertEqual(some_jew_in_cart.get("total_price"), 2 * old_price)
 
     def test_cart_with_jewelries(self):
-        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)), {
-            'quantity': 3
-        })
-        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew2.slug)), {
-            'quantity': 2
-        })
+        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
+        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
+        self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew2.slug)))
         self.client.get(reverse('cart'))
         cart = Cart(RequestRecord(session=self.client.session))
-        self.assertEqual(cart.get_total_price(), 5*self.jew.price)
+        self.assertEqual(cart.get_total_price(), 3*self.jew.price)
