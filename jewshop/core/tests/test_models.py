@@ -1,4 +1,6 @@
 import tempfile
+
+from django.core.exceptions import ValidationError
 from django.db import IntegrityError
 from django.test import TestCase
 from ..models import Metal, Material, Category, Jewelry, Review
@@ -191,25 +193,19 @@ class ReviewTestCase(Settings):
         self.assertEqual(self.review.stars, 5)
 
     def test_unsuccessful_creating_less_min_value(self):
-        """
-        Не работает проверка валидатора
-        """
-        # review_with_value_more_max_value = Review(
-        #     title="test_review_2",
-        #     stars=0,
-        # )
-        # with self.assertRaises(ValidationError):
-        #     review_with_value_more_max_value.save()
-        pass
+        review_with_value_more_min_value = Review(
+            title="test_review_2",
+            stars=0,
+        )
+        with self.assertRaises(ValidationError):
+            review_with_value_more_min_value.full_clean()
+            review_with_value_more_min_value.save()
 
     def test_unsuccessful_creating_more_max_value(self):
-        """
-        Не работает проверка валидатора
-        """
-        # review_with_value_more_max_value = Review(
-        #     title="test_review_2",
-        #     stars=6,
-        # )
-        # with self.assertRaises(ValidationError):
-        #     review_with_value_more_max_value.save()
-        pass
+        review_with_value_more_max_value = Review(
+            title="test_review_2",
+            stars=6,
+        )
+        with self.assertRaises(ValidationError):
+            review_with_value_more_max_value.full_clean()
+            review_with_value_more_max_value.save()
