@@ -1,7 +1,7 @@
 import datetime
 import tempfile
 from django.urls import reverse
-from ..models import Metal, Material, Category, Jewelry, Review
+from core.models import Metal, Material, Category, Jewelry, Review, Gallery
 from .test_models import Settings
 
 
@@ -53,3 +53,56 @@ class HomeViewTestCase(Settings):
         self.assertIn(review_last, context_reviews)
         self.assertEqual(context_reviews[0].title, 'test_review_2')
         self.assertEqual(context_reviews[1].title, 'test_review')
+
+
+class JewelryDetailViewTestCase(Settings):
+    def test_url_and_template(self):
+        url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
+        response = self.client.get(url)
+        self.assertEqual(url, f'/jewelries/{self.jew.slug}/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/jewelry_view.html')
+        self.assertEqual(response.context.get('title'), self.jew.title)
+
+    def test_check_add(self):
+        quantity_for_add = 2
+        for _ in range(quantity_for_add):
+            self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
+        url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
+        response = self.client.get(url)
+        self.assertEqual(response.context.get('remain'), self.jew.quantity - quantity_for_add)
+        self.assertEqual(response.context.get('in_cart'), quantity_for_add)
+
+    def test_check_add_full(self):
+        for _ in range(self.jew.quantity):
+            self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
+        url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
+        response = self.client.get(url)
+        self.assertEqual(response.context.get('remain'), 0)
+        self.assertEqual(response.context.get('in_cart'), self.jew.quantity)
+
+    def test_check_remove(self):
+        quantity_for_add = 3
+        for _ in range(quantity_for_add):
+            self.client.post(reverse('cart_add', kwargs=dict(jew_slug=self.jew.slug)))
+        self.client.post(reverse('cart_remove', kwargs=dict(jew_slug=self.jew.slug)))
+        url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
+        response = self.client.get(url)
+        self.assertEqual(response.context.get('remain'), self.jew.quantity)
+        self.assertEqual(response.context.get('in_cart'), 0)
+
+    def test_check_gallery(self):
+        image1 = Gallery.objects.create(image='img1.jpg', jewelry=self.jew)
+        image2 = Gallery.objects.create(image='img2.jpg', jewelry=self.jew)
+        url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
+        response = self.client.get(url)
+        self.assertEqual(response.context.get('image_links'), [image1.image.url, image2.image.url])
+
+    def test_check_tags(self):
+        url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
+        response = self.client.get(url)
+        if self.jew.is_in_stock:
+            self.assertContains(response, 'В наличии')
+        self.assertContains(response, str(self.jew.metal_cat).capitalize())
+        for material_cat in self.jew.material_cats.all():
+            self.assertContains(response, str(material_cat).capitalize())
