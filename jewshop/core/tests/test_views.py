@@ -1,5 +1,6 @@
 import datetime
 import tempfile
+from django.test import TestCase
 from django.urls import reverse
 from core.models import Metal, Material, Category, Jewelry, Review, Gallery
 from .test_models import Settings
@@ -101,8 +102,122 @@ class JewelryDetailViewTestCase(Settings):
     def test_check_tags(self):
         url = reverse('jewelries', kwargs=dict(jew_slug=self.jew.slug))
         response = self.client.get(url)
-        if self.jew.is_in_stock:
-            self.assertContains(response, 'В наличии')
+        self.assertContains(response, 'В наличии')
         self.assertContains(response, str(self.jew.metal_cat).capitalize())
         for material_cat in self.jew.material_cats.all():
             self.assertContains(response, str(material_cat).capitalize())
+
+
+class CatalogTestCase(TestCase):
+    def setUp(self):
+        self.metal1 = Metal.objects.create(title="met1", slug="met1_slug")
+        self.metal2 = Metal.objects.create(title="met2", slug="met2_slug")
+        self.material1 = Material.objects.create(title="mat1", slug="mat1_slug", image="1.jpg")
+        self.material2 = Material.objects.create(title="mat2", slug="mat2_slug", image="2.jpg")
+        self.category1 = Category.objects.create(title="cat1", slug="cat1_slug")
+        self.category2 = Category.objects.create(title="cat2", slug="cat2_slug")
+
+        self.jew1 = Jewelry.objects.create(
+            title="jew1",
+            slug="jew1_slug",
+            price=100,
+            is_in_stock=True,
+            jew_cat=self.category1,
+            metal_cat=self.metal1,
+            main_photo="image.jpg"
+        )
+        self.jew1.material_cats.add(self.material1)
+        self.jew2 = Jewelry.objects.create(
+            title="jew2",
+            slug="jew2_slug",
+            price=200,
+            is_in_stock=True,
+            jew_cat=self.category1,
+            metal_cat=self.metal2,
+            main_photo="image.jpg"
+        )
+        self.jew2.material_cats.add(self.material2)
+        self.jew2.material_cats.add(self.material1)
+        self.jew3 = Jewelry.objects.create(
+            title="jew3",
+            slug="jew3_slug",
+            price=150,
+            is_in_stock=True,
+            jew_cat=self.category2,
+            metal_cat=self.metal1,
+            main_photo="image.jpg"
+        )
+        self.jew3.material_cats.add(self.material2)
+        self.jew4 = Jewelry.objects.create(
+            title="jew4",
+            slug="jew4_slug",
+            price=250,
+            is_in_stock=True,
+            jew_cat=self.category2,
+            metal_cat=self.metal2,
+            main_photo="image.jpg"
+        )
+        self.jew4.material_cats.add(self.material1)
+        self.jew4.material_cats.add(self.material2)
+        self.jew5 = Jewelry.objects.create(
+            title="jew5",
+            slug="jew5_slug",
+            price=250,
+            is_in_stock=False,
+            jew_cat=self.category1,
+            metal_cat=self.metal1,
+            main_photo="image.jpg"
+        )
+        self.jew5.material_cats.add(self.material1)
+
+    def test_init_catalog(self):
+        response = self.client.get(reverse('catalog'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/jewelry_catalog.html')
+        self.assertEqual(len(response.context.get('jewelries')), 5)
+
+    def test_catalog_with_jewelries_in_stock(self):
+        response = self.client.get(reverse('catalog'), dict(in_stock=1))
+        self.assertEqual(len(response.context.get('jewelries')), 4)
+
+    def test_catalog_with_jewelries_not_in_stock(self):
+        response = self.client.get(reverse('catalog'), dict(in_stock=0))
+        self.assertEqual(len(response.context.get('jewelries')), 1)
+
+    def test_catalog_with_certain_metal(self):
+        response = self.client.get(reverse('catalog'), dict(metal=self.metal1.slug))
+        self.assertEqual(len(response.context.get('jewelries')), 3)
+
+    def test_catalog_with_certain_category(self):
+        response = self.client.get(reverse('catalog'), dict(category=self.category1.slug))
+        self.assertEqual(len(response.context.get('jewelries')), 3)
+
+    def test_catalog_with_several_certain_materials(self):
+        response = self.client.get(reverse('catalog'), dict(material=[self.material1.slug, self.material2.slug]))
+        self.assertEqual(len(response.context.get('jewelries')), 5)
+
+    def test_catalog_with_one_certain_material(self):
+        response = self.client.get(reverse('catalog'), dict(material=self.material1.slug))
+        self.assertEqual(len(response.context.get('jewelries')), 4)
+
+    def test_catalog_with_several_filters(self):
+        response = self.client.get(reverse('catalog'), {
+            'in_stock': 1,
+            'category': self.category1.slug
+        })
+        self.assertEqual(len(response.context.get('jewelries')), 2)
+
+    def test_catalog_with_several_filters_2(self):
+        response = self.client.get(reverse('catalog'), {
+            'in_stock': 0,
+            'metal': self.metal2.slug
+        })
+        self.assertEqual(len(response.context.get('jewelries')), 0)
+
+    def test_catalog_with_several_filters_3(self):
+        response = self.client.get(reverse('catalog'), {
+            'material': [self.material1.slug],
+            'metal': self.metal2.slug,
+            'category': self.category1.slug
+        })
+        self.assertEqual(len(response.context.get('jewelries')), 1)
