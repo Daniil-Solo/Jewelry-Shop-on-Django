@@ -46,10 +46,9 @@ class JewelryView(MenuMixin, DetailView):
     def get_context_data(self, *args, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context["image_links"] = [gallery.image.url for gallery in context["jew"].images.all()]
-        menu_context = self.get_menu_context_data(title="Украшение")
+        menu_context = self.get_menu_context_data(title=self.object.title)
         context["remain"] = self.object.quantity - Cart(self.request).get_current_quantity(self.object)
         context["in_cart"] = self.object.quantity - context["remain"]
-        print(context["remain"])
         return {**context, **menu_context}
 
 
@@ -79,26 +78,20 @@ class JewelryCatalog(MenuMixin, ListView):
         if filters:
             if filters.get("category"):
                 params = self.request.GET.getlist('category')
-                print(params)
                 jewelries = jewelries.filter(jew_cat__slug__in=params)
             if filters.get("metal"):
                 params = self.request.GET.getlist('metal')
                 jewelries = jewelries.filter(metal_cat__slug__in=params)
-                print(params)
             if filters.get("material"):
                 params = self.request.GET.getlist('material')
                 jewelries = jewelries.filter(material_cats__slug__in=params)
-                print(params)
             if filters.get("min_price"):
                 params = float(filters["min_price"])
                 jewelries = jewelries.filter(price__gte=params)
-                print(params)
             if filters.get("max_price"):
                 params = float(filters["max_price"])
                 jewelries = jewelries.filter(price__lte=params)
-                print(params)
             if filters.get("in_stock"):
                 params = bool(int(filters["in_stock"]))
                 jewelries = jewelries.filter(is_in_stock__exact=params)
-                print(params)
         return jewelries.distinct()
