@@ -33,7 +33,7 @@ class HomeViewTestCase(Settings):
             main_photo=tempfile.NamedTemporaryFile(suffix='.jpg').name,
             price=100,
         )
-        jew_in_stock_last.date_create = str(datetime.date.today()+datetime.timedelta(days=1))
+        jew_in_stock_last.date_create = str(datetime.date.today() + datetime.timedelta(days=1))
         jew_in_stock_last.save()
         context_jewelries = self.client.get(reverse('home')).context.get('jewelries')
         self.assertIn(self.jew, context_jewelries)
@@ -47,7 +47,7 @@ class HomeViewTestCase(Settings):
             title="test_review_2",
             stars=5,
         )
-        review_last.date_create = str(datetime.date.today()+datetime.timedelta(days=1))
+        review_last.date_create = str(datetime.date.today() + datetime.timedelta(days=1))
         review_last.save()
         context_reviews = self.client.get(reverse('home')).context.get('reviews')
         self.assertIn(self.review, context_reviews)
@@ -221,3 +221,55 @@ class CatalogTestCase(TestCase):
             'category': self.category1.slug
         })
         self.assertEqual(len(response.context.get('jewelries')), 1)
+
+
+class SearchViewTestCase(TestCase):
+    def setUp(self):
+        self.metal1 = Metal.objects.create(title="met1", slug="met1_slug")
+        self.category1 = Category.objects.create(title="cat1", slug="cat1_slug")
+        self.jew1 = Jewelry.objects.create(
+            title="jew_1",
+            slug="jew1_slug",
+            price=200,
+            jew_cat=self.category1,
+            metal_cat=self.metal1,
+            main_photo="image.jpg"
+        )
+        self.jew1 = Jewelry.objects.create(
+            title="super_jew_2",
+            slug="jew2_slug",
+            price=200,
+            jew_cat=self.category1,
+            metal_cat=self.metal1,
+            main_photo="image.jpg"
+        )
+        self.jew1 = Jewelry.objects.create(
+            title="super_jew_3",
+            slug="jew3_slug",
+            price=200,
+            jew_cat=self.category1,
+            metal_cat=self.metal1,
+            main_photo="image.jpg"
+        )
+
+    def test_init_search(self):
+        response = self.client.get(reverse('search'), data=dict(q=''))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'core/jewelry_search.html')
+        self.assertEqual(len(response.context.get('jewelries')), 3)
+
+    def test_empty_result(self):
+        response = self.client.get(reverse('search'), data=dict(q='some_query'))
+        self.assertEqual(len(response.context.get('jewelries')), 0)
+
+    def test_only_one_result(self):
+        response = self.client.get(reverse('search'), data=dict(q='1'))
+        self.assertEqual(len(response.context.get('jewelries')), 1)
+
+    def test_full_match(self):
+        response = self.client.get(reverse('search'), data=dict(q='jew_1'))
+        self.assertEqual(len(response.context.get('jewelries')), 1)
+
+    def test_several_results(self):
+        response = self.client.get(reverse('search'), data=dict(q='super'))
+        self.assertEqual(len(response.context.get('jewelries')), 2)
