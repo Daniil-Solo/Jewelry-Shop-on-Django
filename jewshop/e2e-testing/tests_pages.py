@@ -62,7 +62,7 @@ class TestWalkPage(StaticLiveServerTestCase):
         self.jew5 = Jewelry.objects.create(
             title="jew5",
             slug="jew5_slug",
-            price=250,
+            price=300,
             is_in_stock=False,
             jew_cat=self.category1,
             metal_cat=self.metal1,
@@ -144,3 +144,55 @@ class TestUser(TestWalkPage):
         with self.assertRaises(NoSuchElementException):
             self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
             cart = self.browser.find_element(By.CSS_SELECTOR, "#cart p").text
+
+
+class TestCart(TestUser):
+    def test_cart(self):
+        super().test_success_registration()
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(2) a").click()
+
+        self.browser.find_element(By.NAME, "in_stock").click()
+        category_checkboxes = self.browser.find_elements(By.NAME, "category")
+        for category_checkbox in category_checkboxes:
+            category_checkbox.click()
+        material_checkboxes = self.browser.find_elements(By.NAME, "material")
+        for material_checkbox in material_checkboxes:
+            material_checkbox.click()
+        metal_checkboxes = self.browser.find_elements(By.NAME, "metal")
+        for metal_checkbox in metal_checkboxes:
+            self.browser.execute_script("arguments[0].click();", metal_checkbox)
+
+        show_btn = self.browser.find_element(By.CSS_SELECTOR, "#filters .btn-group.col-6:nth-child(1) button")
+        self.browser.execute_script("arguments[0].click();", show_btn)
+
+        some_jewelry = self.browser.find_element(By.CSS_SELECTOR, "#jewelries .card-item .card-footer a")
+        self.browser.execute_script("arguments[0].click();", some_jewelry)
+
+        add_into_cart_btn = self.browser.find_element(By.CSS_SELECTOR, "#view .price a")
+        self.browser.execute_script("arguments[0].click();", add_into_cart_btn)
+
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
+        order_btn = self.browser.find_element(By.CSS_SELECTOR, "#cart p a")
+        order_btn.click()
+
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
+        remove_from_cart_btn = self.browser.find_element(By.CSS_SELECTOR, "#cart table a")
+        remove_from_cart_btn.click()
+
+    def test_fail_cart(self):
+        super().test_fail_registration()
+        self.browser.get(self.live_server_url)
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(2) a").click()
+
+        self.browser.find_element(By.NAME, "in_stock").click()
+        show_btn = self.browser.find_element(By.CSS_SELECTOR, "#filters .btn-group.col-6:nth-child(1) button")
+        self.browser.execute_script("arguments[0].click();", show_btn)
+
+        some_jewelry = self.browser.find_element(By.CSS_SELECTOR, "#jewelries .card-item .card-footer a")
+        self.browser.execute_script("arguments[0].click();", some_jewelry)
+
+        add_into_cart_btn = self.browser.find_element(By.CSS_SELECTOR, "#view .price a")
+        self.browser.execute_script("arguments[0].click();", add_into_cart_btn)
+
+        authorization_title = self.browser.find_element(By.TAG_NAME, "h3").text
+        self.assertEqual(authorization_title, "Авторизация")
