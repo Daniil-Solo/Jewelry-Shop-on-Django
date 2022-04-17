@@ -1,5 +1,10 @@
+import time
+
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 
 from core.models import Metal, Material, Category, Jewelry, Review
@@ -73,4 +78,27 @@ class TestWalkPage(StaticLiveServerTestCase):
         self.browser.quit()
 
 
+class TestHomePage(TestWalkPage):
+    def setUp(self):
+        self.review1 = Review.objects.create(title="Rev1", stars=5, text="Some text. Some text. Some text. Some text")
+        self.review2 = Review.objects.create(title="Rev2", stars=5, text="Some text. Some text. Some text. Some text")
+        self.review3 = Review.objects.create(title="Rev3", stars=5, text="Some text. Some text. Some text. Some text")
+        self.review4 = Review.objects.create(title="Rev4", stars=5, text="Some text. Some text. Some text. Some text")
+        self.review5 = Review.objects.create(title="Rev5", stars=5, text="Some text. Some text. Some text. Some text")
+        super().setUp()
+
+    def test_reviews(self):
+        self.browser.get(self.live_server_url)
+        btn_next = self.browser.find_element(By.CSS_SELECTOR, "button.carousel-control-next")
+        btn_prev = self.browser.find_element(By.CSS_SELECTOR, "button.carousel-control-prev")
+        btn_next.click()
+        btn_prev.click()
+
+    def test_news(self):
+        self.browser.get(self.live_server_url)
+        news = self.browser.find_elements(By.CSS_SELECTOR, "#news .card-item")
+        self.assertEqual(len(news), 3)
+        links = [new.find_element(By.TAG_NAME, 'a').get_attribute("href") for new in news]
+        for link in links:
+            self.browser.get(link)
 
