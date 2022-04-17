@@ -1,5 +1,3 @@
-import time
-
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
@@ -102,3 +100,47 @@ class TestHomePage(TestWalkPage):
         for link in links:
             self.browser.get(link)
 
+
+class TestUser(TestWalkPage):
+    hard_password = "My123The456Password"
+    light_password = "12345"
+    right_email = "testing@test.com"
+    wrong_email = "test.com"
+
+    def test_success_registration(self):
+        self.browser.get(self.live_server_url)
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(7) a").click()
+
+        name_field = self.browser.find_element(By.NAME, "username")
+        name_field.send_keys("Тестер")
+        email_field = self.browser.find_element(By.NAME, "email")
+        email_field.send_keys(self.right_email)
+        password1_filed = self.browser.find_element(By.NAME, "password1")
+        password1_filed.send_keys(self.hard_password)
+        password2_filed = self.browser.find_element(By.NAME, "password2")
+        password2_filed.send_keys(self.hard_password)
+        submit_btn = self.browser.find_element(By.TAG_NAME, "button")
+        submit_btn.click()
+
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
+        cart = self.browser.find_element(By.CSS_SELECTOR, "#cart p").text
+        self.assertEqual(cart, "Пока товаров нет")
+
+    def test_fail_registration(self):
+        self.browser.get(self.live_server_url)
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(7) a").click()
+
+        name_field = self.browser.find_element(By.NAME, "username")
+        name_field.send_keys("Тестер")
+        email_field = self.browser.find_element(By.NAME, "email")
+        email_field.send_keys(self.wrong_email)
+        password1_filed = self.browser.find_element(By.NAME, "password1")
+        password1_filed.send_keys(self.light_password)
+        password2_filed = self.browser.find_element(By.NAME, "password2")
+        password2_filed.send_keys(self.light_password)
+        submit_btn = self.browser.find_element(By.TAG_NAME, "button")
+        submit_btn.click()
+
+        with self.assertRaises(NoSuchElementException):
+            self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
+            cart = self.browser.find_element(By.CSS_SELECTOR, "#cart p").text
