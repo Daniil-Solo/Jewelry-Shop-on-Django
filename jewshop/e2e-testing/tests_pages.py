@@ -122,7 +122,7 @@ class TestUser(TestWalkPage):
         submit_btn = self.browser.find_element(By.TAG_NAME, "button")
         submit_btn.click()
 
-        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
+        self.browser.find_element(By.CSS_SELECTOR, "#my_cart").click()
         cart = self.browser.find_element(By.CSS_SELECTOR, "#cart p").text
         self.assertEqual(cart, "Пока товаров нет")
 
@@ -143,7 +143,6 @@ class TestUser(TestWalkPage):
 
         with self.assertRaises(NoSuchElementException):
             self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
-            cart = self.browser.find_element(By.CSS_SELECTOR, "#cart p").text
 
 
 class TestCart(TestUser):
@@ -171,13 +170,18 @@ class TestCart(TestUser):
         add_into_cart_btn = self.browser.find_element(By.CSS_SELECTOR, "#view .price a")
         self.browser.execute_script("arguments[0].click();", add_into_cart_btn)
 
-        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
+        self.browser.find_element(By.ID, "my_cart").click()
         order_btn = self.browser.find_element(By.CSS_SELECTOR, "#cart p a")
         order_btn.click()
 
-        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(6) ul li:nth-child(3) a").click()
-        remove_from_cart_btn = self.browser.find_element(By.CSS_SELECTOR, "#cart table a")
+        order_title = self.browser.find_element(By.TAG_NAME, "h6").text
+        self.assertEqual(order_title, "Оформление заказа")
+
+        self.browser.find_element(By.ID, "my_cart").click()
+        remove_from_cart_btn = self.browser.find_element(By.CSS_SELECTOR, "#cart table a:nth-child(2)")
         remove_from_cart_btn.click()
+        cart_text = self.browser.find_element(By.CSS_SELECTOR, "#cart p").text
+        self.assertEqual(cart_text, "Пока товаров нет")
 
     def test_fail_cart(self):
         super().test_fail_registration()
