@@ -6,22 +6,28 @@
     <div class="container">
         <h6 class="text-center display-6">Новинки</h6>
         <div class="row">
-            {% for jew in jewelries %}
-            <div class="card-item col-12 col-lg-3 col-md-4">
-                <div class="card h-100">
-                    <a href="{{ jew.get_absolute_url }}">
-                        <img src="{{jew.main_photo.url}}" class="card-img-top" alt="фото украшения">
-                    </a>
-                    <div class="card-body text-center">
-                        <h5 class="card-title title-gray">{{jew.title}}</h5>
-                    </div>
-                    <div class="card-footer text-center">
-                        <p class="card-text price-gray">{{jew.price|floatformat:"0"}} руб.</p>
-                        <a href="{{ jew.get_absolute_url }}" class="btn btn-detail pretty-green without_box">Подробнее</a>
+            {% if jewelries %}
+                {% for jew in jewelries %}
+                <div class="card-item col-12 col-lg-3 col-md-4">
+                    <div class="card h-100">
+                        <a href="{{ jew.get_absolute_url }}">
+                            <img src="{{jew.main_photo.url}}" class="card-img-top" alt="фото украшения">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title title-gray">{{jew.title}}</h5>
+                        </div>
+                        <div class="card-footer text-center">
+                            <p class="card-text price-gray">{{jew.price|floatformat:"0"}} руб.</p>
+                            <a href="{{ jew.get_absolute_url }}" class="btn btn-detail pretty-green without_box">Подробнее</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            {% endfor %}
+                {% endfor %}
+            {% else %}
+            <p class="text-center">
+                Пока новинок нет
+            </p>
+            {% endif %}
         </div>
     </div>
 </section>
