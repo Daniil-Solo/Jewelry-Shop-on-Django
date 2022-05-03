@@ -16,14 +16,21 @@ def check_order(request):
     for item in cart:
         product = item["product"]
         quantity = item["quantity"]
+        if not product:
+            cart.set_forced_to_update(True)
+            cart.remove(product)
+            continue
         real_quantity = product.quantity
         if quantity > real_quantity:
             cart.set_forced_to_update(True)
-            print(real_quantity)
             if real_quantity == 0:
                 cart.remove(product)
             else:
                 cart.set_quantity(product, real_quantity)
+        if not product.is_in_stock:
+            cart.set_forced_to_update(True)
+            cart.remove(product)
+
     if cart.products_updated:
         return redirect('cart')
     else:
@@ -35,7 +42,7 @@ class CreateOrderDoneView(MenuMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
-        context['order_number'] = Order.objects.last()
+        context['order_number'] = Order.objects.last().pk
         menu_context = self.get_menu_context_data(title="Заказ оформлен")
         return {**context, **menu_context}
 

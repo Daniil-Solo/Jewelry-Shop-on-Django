@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from jewshop.settings import CART_SESSION_ID, CART_FORCED_TO_UPDATE
 from core.models import Jewelry
 
@@ -51,11 +52,10 @@ class Cart(object):
         }
         self.save()
 
-    def remove(self, jewelry: Jewelry):
+    def remove(self, jewelry_slug: str):
         """
         Удаляет указанный товар из корзины
         """
-        jewelry_slug = jewelry.slug
         if jewelry_slug in self.products:
             del self.products[jewelry_slug]
             self.save()
@@ -82,14 +82,11 @@ class Cart(object):
         """
         jewelry_slugs = self.products.keys()
         jewelry_slugs = list(jewelry_slugs)
-        jewelries = (
-            Jewelry
-                .objects
-                .only("title", "slug", "main_photo")
-                .filter(slug__in=jewelry_slugs)
-        )
-        for jew in jewelries:
-            jew_slug = jew.slug
+        for jew_slug in jewelry_slugs:
+            try:
+                jew = Jewelry.objects.get(slug__exact=jew_slug)
+            except ObjectDoesNotExist:
+                jew = None
             item = dict(
                 product=jew,
                 price=float(self.products[jew_slug]['price']),
