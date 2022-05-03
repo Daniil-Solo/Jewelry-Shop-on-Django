@@ -9,14 +9,13 @@ class MenuMixin:
             dict(title="Покупателям",
                  sub_items=[
                      dict(title="Новинки", url=reverse("home")+"#news", target="self"),
-                     dict(title="Доставка", url=reverse("catalog"), target="self"),
-                     dict(title="Оплата", url=reverse("catalog"), target="self"),
-                     dict(title="Уход", url=reverse("catalog"), target="self"),
+                     dict(title="Доставка", url=reverse("delivery"), target="self"),
+                     dict(title="Оплата", url=reverse("payment"), target="self"),
                     ]
                  ),
             dict(title="Информация",
                  sub_items=[
-                     dict(title="О нас", url=reverse("catalog"), target="self"),
+                     dict(title="О нас", url=reverse("about"), target="self"),
                      dict(title="Отзывы", url=reverse("home")+"#reviews", target="self"),
                     ]
                  ),
