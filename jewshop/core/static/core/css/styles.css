@@ -323,3 +323,18 @@ section#delivery{
 #delivery-partners{
     margin-top: 50px;
 }
+/*----------------Доставка-------------------*/
+section#about{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+#about h6{
+    margin: 20px 0px;
+    text-align: center;
+}
+#socials{
+    margin-top: 10px;
+}
+#socials a{
+    display: inline-block;
+}
