@@ -3,7 +3,7 @@
 
 {% block content %}
 <header class="light-green">
-    <a href="#">
+    <a href="{% url 'home' %}">
         <img class="center" src="{%static 'core/images/logo.png' %}"  alt="Логотип">
     </a>
     <form action="{% url 'search' %}" method="get">
@@ -34,24 +34,17 @@
                     <a class="btn btn-underline pretty-green without_box" href="{% url 'catalog' %}">Каталог</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-underline pretty-green without_box" href="#">Оплата</a>
+                    <a class="btn btn-underline pretty-green without_box" href="{% url 'payment' %}">Оплата</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-underline pretty-green without_box" href="#">Доставка</a>
+                    <a class="btn btn-underline pretty-green without_box" href="{% url 'delivery' %}">Доставка</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-underline pretty-green without_box" href="#">О нас</a>
+                    <a class="btn btn-underline pretty-green without_box" href="{% url 'about' %}">О нас</a>
                 </li>
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                        <a id="my_profile" class="btn pretty-green without_box" href="#">
-                            <svg width="16" height="16" fill="white">
-                              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                            </svg>
-                        </a>
-                        </li>
                         <li class="nav-item">
                             <a id="my_cart" class="btn pretty-green without_box" href="{% url 'cart' %}">
                                 <svg width="16" height="16" fill="white">
