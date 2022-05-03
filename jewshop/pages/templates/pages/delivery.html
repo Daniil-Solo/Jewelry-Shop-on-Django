@@ -1,0 +1,36 @@
+{% extends 'core/content.html' %}
+{% load static %}
+
+{% block maincontent %}
+<section id="delivery">
+  <div class="container">
+    <h6 class="text-center display-6">Доставка</h6>
+    <ul>
+      <li>
+        <p class="text-center">
+          1. Стандартная доставка осуществляется почтой России 1 классом
+        </p>
+      </li>
+      <li>
+        <p class="text-center">
+          2. Возможен самовывоз из Перми по предварительной договоренности
+        </p>
+      </li>
+      <li>
+        <p class="text-center">
+          3. При заказе от 2000 рублей стандартная доставка бесплатная
+        </p>
+      </li>
+      <li>
+        <p class="text-center">
+          4. Также возможна доставка через СДЭК
+        </p>
+      </li>
+    </ul>
+    <div id="delivery-partners" class="text-center">
+      <img src="https://www.pochta.ru/errors/static-assets/images/logo.036222e58a2f72dfb287756d6b84a5b6.svg" class="rounded" alt="Логотип почты России">
+      <img src="https://www.cdek.ru/storage/source/logo/1/WwRC73vQdmjyYz-FuqiKlHCMWdW2xv0P.svg" class="rounded" alt="Логотип СДЭК">
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -308,3 +308,15 @@ section#payment{
     margin: 20px 0px;
     text-align: center;
 }
+/*----------------Доставка-------------------*/
+section#delivery{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+#delivery h6{
+    margin: 20px 0px;
+    text-align: center;
+}
+#delivery-partners{
+    margin-top: 50px;
+}

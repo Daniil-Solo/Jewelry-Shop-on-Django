@@ -14,3 +14,12 @@ class PaymentView(TemplateView, MenuMixin):
         context = super().get_context_data(**kwargs)
         menu_context = self.get_menu_context_data(title='Об оплате')
         return {**context, **menu_context}
+
+
+class DeliveryView(TemplateView, MenuMixin):
+    template_name = 'pages/delivery.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        menu_context = self.get_menu_context_data(title='Об оплате')
+        return {**context, **menu_context}
