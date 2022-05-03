@@ -28,12 +28,12 @@ class Cart(object):
         """
         return len(self.products) > 0
 
-    def add(self, jewelry: Jewelry) -> None:
+    def add(self, jewelry_slug: str) -> None:
         """
         Добавляет одну единицу указанного товара в корзину
         """
-        jewelry_slug = jewelry.slug
         if jewelry_slug not in self.products:
+            jewelry = Jewelry.objects.get(slug__exact=jewelry_slug)
             self.products[jewelry_slug] = {
                 'quantity': 0,
                 'price': jewelry.price
@@ -41,11 +41,11 @@ class Cart(object):
         self.products[jewelry_slug]['quantity'] += 1
         self.save()
 
-    def set_quantity(self, jewelry: Jewelry, new_quantity: float) -> None:
+    def set_quantity(self, jewelry_slug: str, new_quantity: float) -> None:
         """
         Устанавливает число единиц указанного товара
         """
-        jewelry_slug = jewelry.slug
+        jewelry = Jewelry.objects.get(slug__exact=jewelry_slug)
         self.products[jewelry_slug] = {
             'quantity': new_quantity,
             'price': jewelry.price
@@ -101,11 +101,10 @@ class Cart(object):
         """
         return sum(item['price'] * item['quantity'] for item in self.products.values())
 
-    def get_current_quantity(self, jewelry: Jewelry) -> float:
+    def get_current_quantity(self, jewelry_slug: str) -> float:
         """
         Возвращает текущее количество данного товара в корзине
         """
-        jewelry_slug = jewelry.slug
         if jewelry_slug in self.products:
             return self.products[jewelry_slug]["quantity"]
         else:

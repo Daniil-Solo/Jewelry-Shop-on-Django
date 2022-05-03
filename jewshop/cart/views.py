@@ -11,14 +11,13 @@ def cart_add(request, jew_slug):
     jewelry = get_object_or_404(Jewelry, slug=jew_slug)
     current_quantity = cart.get_current_quantity(jewelry)
     if not current_quantity or current_quantity < jewelry.quantity:
-        cart.add(jewelry=jewelry)
+        cart.add(jew_slug)
     return redirect('jewelries', jew_slug)
 
 
 def cart_remove(request, jew_slug):
     cart = Cart(request)
-    jewelry = get_object_or_404(Jewelry, slug=jew_slug)
-    cart.remove(jewelry)
+    cart.remove(jew_slug)
     return redirect('cart')
 
 
