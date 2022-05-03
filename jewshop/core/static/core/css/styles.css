@@ -299,3 +299,12 @@ section#order-complete, section#order{
 #order .order-col{
     margin: 20px 0px;
 }
+/*----------------Покупка-------------------*/
+section#payment{
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+#payment h6{
+    margin: 20px 0px;
+    text-align: center;
+}
