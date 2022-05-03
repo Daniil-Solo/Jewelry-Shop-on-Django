@@ -308,6 +308,9 @@ section#payment{
     margin: 20px 0px;
     text-align: center;
 }
+#payment-partners{
+    margin-top: 50px;
+}
 /*----------------Доставка-------------------*/
 section#delivery{
     margin-top: 50px;
