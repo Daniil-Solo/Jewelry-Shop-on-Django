@@ -47,7 +47,7 @@ class JewelryView(MenuMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context["image_links"] = [gallery.image.url for gallery in context["jew"].images.all()]
         menu_context = self.get_menu_context_data(title=self.object.title)
-        context["remain"] = self.object.quantity - Cart(self.request).get_current_quantity(self.object)
+        context["remain"] = self.object.quantity - Cart(self.request).get_current_quantity(self.object.slug)
         context["in_cart"] = self.object.quantity - context["remain"]
         return {**context, **menu_context}
 
