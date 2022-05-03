@@ -91,6 +91,7 @@ class Cart(object):
                 product=jew,
                 price=float(self.products[jew_slug]['price']),
                 quantity=int(self.products[jew_slug]['quantity']),
+                slug=jew_slug,
             )
             item['total_price'] = item['price'] * item['quantity']
             yield item

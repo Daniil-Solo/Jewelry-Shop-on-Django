@@ -16,20 +16,21 @@ def check_order(request):
     for item in cart:
         product = item["product"]
         quantity = item["quantity"]
+        slug = item["slug"]
         if not product:
             cart.set_forced_to_update(True)
-            cart.remove(product)
+            cart.remove(slug)
             continue
         real_quantity = product.quantity
         if quantity > real_quantity:
             cart.set_forced_to_update(True)
             if real_quantity == 0:
-                cart.remove(product)
+                cart.remove(slug)
             else:
-                cart.set_quantity(product, real_quantity)
+                cart.set_quantity(slug, real_quantity)
         if not product.is_in_stock:
             cart.set_forced_to_update(True)
-            cart.remove(product)
+            cart.remove(slug)
 
     if cart.products_updated:
         return redirect('cart')
