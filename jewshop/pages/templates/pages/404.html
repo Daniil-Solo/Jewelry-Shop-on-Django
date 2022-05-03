@@ -1,0 +1,10 @@
+{% extends "registration/base.html"%}
+
+{% block message-title %}
+Страница не найдена
+{% endblock %}
+
+{% block message-body %}
+<p>К сожалению мы не смогли найти такую страницу :(</p>
+<p><a href="{% url 'home' %}">Вернуться на главную страницу</a></p>
+{% endblock %}

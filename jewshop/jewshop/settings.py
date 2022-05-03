@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'core.apps.CoreConfig',
     'users.apps.UsersConfig',
-    'order.apps.OrderConfig'
+    'order.apps.OrderConfig',
+    'pages.apps.PagesConfig',
 ]
 
 MIDDLEWARE = [
