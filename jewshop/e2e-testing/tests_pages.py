@@ -161,7 +161,7 @@ class TestCart(TestUser):
         for metal_checkbox in metal_checkboxes:
             self.browser.execute_script("arguments[0].click();", metal_checkbox)
 
-        show_btn = self.browser.find_element(By.CSS_SELECTOR, "#filters .btn-group.col-6:nth-child(1) button")
+        show_btn = self.browser.find_element(By.CSS_SELECTOR, "#filters button")
         self.browser.execute_script("arguments[0].click();", show_btn)
 
         some_jewelry = self.browser.find_element(By.CSS_SELECTOR, "#jewelries .card-item .card-footer a")
@@ -189,7 +189,7 @@ class TestCart(TestUser):
         self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(2) a").click()
 
         self.browser.find_element(By.NAME, "in_stock").click()
-        show_btn = self.browser.find_element(By.CSS_SELECTOR, "#filters .btn-group.col-6:nth-child(1) button")
+        show_btn = self.browser.find_element(By.CSS_SELECTOR, "#filters button")
         self.browser.execute_script("arguments[0].click();", show_btn)
 
         some_jewelry = self.browser.find_element(By.CSS_SELECTOR, "#jewelries .card-item .card-footer a")
@@ -200,3 +200,23 @@ class TestCart(TestUser):
 
         authorization_title = self.browser.find_element(By.TAG_NAME, "h3").text
         self.assertEqual(authorization_title, "Авторизация")
+
+
+class TestSimplePages(TestWalkPage):
+    def test_pages(self):
+        self.browser.get(self.live_server_url)
+
+        # переход на страницу с оплатой
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(3) a").click()
+        title_payment = self.browser.find_element(By.CSS_SELECTOR, "h6").text
+        self.assertEqual(title_payment, 'Оплата')
+
+        # переход на страницу с доставкой
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(4) a").click()
+        title_delivery = self.browser.find_element(By.CSS_SELECTOR, "h6").text
+        self.assertEqual(title_delivery, 'Доставка')
+
+        # переход на страницу с о нас
+        self.browser.find_element(By.CSS_SELECTOR, "#menu li:nth-child(5) a").click()
+        title_about = self.browser.find_element(By.CSS_SELECTOR, "h6").text
+        self.assertEqual(title_about, 'О нас')
