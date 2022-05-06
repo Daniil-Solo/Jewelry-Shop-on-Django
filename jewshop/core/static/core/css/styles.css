@@ -101,10 +101,9 @@ section#reviews{
     margin: 5px 0px 20px 0px;
 }
 #reviews .card {
-    margin: 0 0.5em;
+    margin: 0 1em;
     border: none;
     background: #b7d8d1;
-    width:450px;
 }
 #reviews .card-body{
     padding: 5px;
@@ -116,26 +115,7 @@ section#reviews{
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
-}
-@media (min-width: 768px) {
-  #reviews .carousel-item {
-    margin-right: 0;
-    flex: 0 0 25%;
-    display: block;
-  }
-  #reviews .carousel-inner {
-    display: flex;
-  }
-}
-@media (max-width: 765px) {
-  #reviews .carousel-item {
-    margin-right: 0;
-    flex: 0 0 50%;
-    display: block;
-  }
-  #reviews .carousel-inner {
-    display: flex;
-  }
+    color: gray;
 }
 /*---------  Каталог  ---------*/
 section#catalog{

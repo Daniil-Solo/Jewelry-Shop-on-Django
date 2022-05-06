@@ -32,7 +32,13 @@ class Home(MenuMixin, TemplateView):
             .filter(is_in_stock=1)
             .order_by("-date_create")[:3]
         )
-        context["reviews"] = Review.objects.all()
+        reviews = Review.objects.all()
+        context["reviews"] = []
+        for idx, review in enumerate(reviews):
+            if idx % 3 == 0:
+                context["reviews"].append([review])
+            else:
+                context["reviews"][-1].append(review)
         menu_context = self.get_menu_context_data(title="Главная")
         return {**context, **menu_context}
 
