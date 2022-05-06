@@ -8,15 +8,15 @@ class MenuMixin:
         context["footer"] = [
             dict(title="Покупателям",
                  sub_items=[
-                     dict(title="Новинки", url=reverse("home")+"#news", target="self"),
-                     dict(title="Доставка", url=reverse("delivery"), target="self"),
-                     dict(title="Оплата", url=reverse("payment"), target="self"),
+                     dict(title="Новинки", url=reverse("home")+"#news"),
+                     dict(title="Доставка", url=reverse("delivery")),
+                     dict(title="Оплата", url=reverse("payment")),
                     ]
                  ),
             dict(title="Информация",
                  sub_items=[
-                     dict(title="О нас", url=reverse("about"), target="self"),
-                     dict(title="Отзывы", url=reverse("home")+"#reviews", target="self"),
+                     dict(title="О нас", url=reverse("about")),
+                     dict(title="Отзывы", url=reverse("home")+"#reviews"),
                     ]
                  ),
             dict(title="Контакты",

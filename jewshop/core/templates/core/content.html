@@ -100,7 +100,7 @@
                 <ul>
                     {% for sub_item in item.sub_items %}
                     <li>
-                        <a class="btn btn-underline pretty-green without_box" href="{{ sub_item.url }}" target="{{sub_item.target}}">
+                        <a class="btn btn-underline pretty-green without_box" href="{{ sub_item.url }}" {% if target %}target="{{sub_item.target}}" {% endif %}>
                             {{sub_item.title}}
                         </a>
                     </li>
