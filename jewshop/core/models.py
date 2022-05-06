@@ -77,8 +77,6 @@ class Category(models.Model):
 class Material(models.Model):
     title = models.CharField(max_length=50, verbose_name="название")
     slug = models.SlugField(unique=True, max_length=50, verbose_name="слаг")
-    image = models.ImageField(upload_to='materials/', max_length=100, verbose_name="изображение")
-    description = models.TextField(null=True, blank=True, verbose_name="описание")
 
     def __str__(self):
         return self.title

@@ -10,7 +10,7 @@ class CartTests(TestCase):
     def setUp(self):
         self.client = Client()
         self.metal = Metal.objects.create(title="test_metal", slug="test_metal_slug")
-        self.material = Material.objects.create(title="test_material", slug="test_material_slug", image="material.jpg")
+        self.material = Material.objects.create(title="test_material", slug="test_material_slug")
         self.category = Category.objects.create(title="test_category", slug="test_category_slug")
         self.jew = Jewelry.objects.create(
             title="test_jew",

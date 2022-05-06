@@ -112,8 +112,8 @@ class CatalogTestCase(TestCase):
     def setUp(self):
         self.metal1 = Metal.objects.create(title="met1", slug="met1_slug")
         self.metal2 = Metal.objects.create(title="met2", slug="met2_slug")
-        self.material1 = Material.objects.create(title="mat1", slug="mat1_slug", image="1.jpg")
-        self.material2 = Material.objects.create(title="mat2", slug="mat2_slug", image="2.jpg")
+        self.material1 = Material.objects.create(title="mat1", slug="mat1_slug")
+        self.material2 = Material.objects.create(title="mat2", slug="mat2_slug")
         self.category1 = Category.objects.create(title="cat1", slug="cat1_slug")
         self.category2 = Category.objects.create(title="cat2", slug="cat2_slug")
 

@@ -23,8 +23,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class MaterialAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", 'slug', "image", "description")
-    search_fields = ('title', 'description')
+    list_display = ("id", "title", 'slug')
+    search_fields = ('title', )
     list_editable = ('title', 'slug')
     prepopulated_fields = {'slug': ('title',)}
 

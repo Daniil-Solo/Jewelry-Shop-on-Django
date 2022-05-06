@@ -18,8 +18,6 @@ class TestCreateOrder(TestCase):
         self.material = Material.objects.create(
             title="test_material",
             slug="test_material_slug",
-            image="image.jpg",
-            description="test_material_description"
         )
         self.category = Category.objects.create(
             title="test_category",
@@ -88,8 +86,6 @@ class TestCheckOrder(TestCase):
         self.material = Material.objects.create(
             title="test_material",
             slug="test_material_slug",
-            image="image.jpg",
-            description="test_material_description"
         )
         self.category = Category.objects.create(
             title="test_category",

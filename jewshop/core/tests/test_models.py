@@ -16,9 +16,7 @@ class Settings(TestCase):
         )
         cls.material = Material.objects.create(
             title="test_material",
-            slug="test_material_slug",
-            image=tempfile.NamedTemporaryFile(suffix='.jpg').name,
-            description="test_material_description"
+            slug="test_material_slug"
         )
         cls.category = Category.objects.create(
             title="test_category",
@@ -70,17 +68,10 @@ class MaterialTestCase(Settings):
         self.assertEqual(self.material._meta.get_field("title").verbose_name, "название")
         self.assertEqual(self.material._meta.get_field("slug").max_length, 50)
         self.assertEqual(self.material._meta.get_field("slug").verbose_name, "слаг")
-        self.assertEqual(self.material._meta.get_field("image").verbose_name, "изображение")
-        self.assertEqual(self.material._meta.get_field("image").max_length, 100)
-        self.assertEqual(self.material._meta.get_field("image").upload_to, 'materials/')
-        self.assertEqual(self.material._meta.get_field("description").verbose_name, "описание")
-        self.assertEqual(self.material._meta.get_field("description").null, True)
-        self.assertEqual(self.material._meta.get_field("description").blank, True)
 
     def test_successful_creating(self):
         self.assertEqual(self.material.title, "test_material")
         self.assertEqual(self.material.slug, "test_material_slug")
-        self.assertEqual(self.material.description, "test_material_description")
 
     def test_unsuccessful_creating(self):
         material_with_duplicated_slug = Material(
