@@ -323,7 +323,11 @@ section#delivery{
 #delivery-partners{
     margin-top: 50px;
 }
-/*----------------Доставка-------------------*/
+#delivery-partners img{
+    height: auto;
+    width: 80px;
+}
+/*----------------О нас-------------------*/
 section#about{
     margin-top: 50px;
     margin-bottom: 100px;
