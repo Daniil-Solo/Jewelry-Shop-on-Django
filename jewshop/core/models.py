@@ -60,6 +60,9 @@ class Gallery(models.Model):
         verbose_name_plural = "Галереи"
         ordering = ["jewelry"]
 
+    def __str__(self):
+        return f'Фото для {self.jewelry.title}'
+
 
 class Category(models.Model):
     title = models.CharField(max_length=50, unique=True, verbose_name="название")
