@@ -50,10 +50,10 @@ class HomeViewTestCase(Settings):
         review_last.date_create = str(datetime.date.today() + datetime.timedelta(days=1))
         review_last.save()
         context_reviews = self.client.get(reverse('home')).context.get('reviews')
-        self.assertIn(self.review, context_reviews)
-        self.assertIn(review_last, context_reviews)
-        self.assertEqual(context_reviews[0].title, 'test_review_2')
-        self.assertEqual(context_reviews[1].title, 'test_review')
+        self.assertIn(self.review, context_reviews[0])
+        self.assertIn(review_last, context_reviews[0])
+        self.assertEqual(context_reviews[0][0].title, 'test_review_2')
+        self.assertEqual(context_reviews[0][1].title, 'test_review')
 
 
 class JewelryDetailViewTestCase(Settings):
