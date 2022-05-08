@@ -16,3 +16,7 @@
 ## Текущий стек технологий
 * Front-end: HTML, CSS, Bootstrap
 * Back-end: Django, SQLite
+
+## Презентация
+### Домашняя страница
+![home](https://github.com/Daniil-Solo/Jewelry-Shop-on-Django/tree/master/source/gifs/home.gif)
