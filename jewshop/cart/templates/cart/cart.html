@@ -24,6 +24,7 @@
             </thead>
             <tbody>
             {% for item in cart %}
+                {% if item.product %}
                 <tr>
                     <th scope="row">{{item.product.title}}</th>
                     <td><img src="{{item.product.main_photo.url}}" style="width: 75px; height: 100%; object-fit: cover;"></td>
@@ -39,6 +40,7 @@
                         </a>
                     </td>
                 </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>

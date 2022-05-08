@@ -80,13 +80,15 @@ class Cart(object):
         Перебор товаров в корзине
         Дополнительно к элементу добавляется ссылка на объект в БД и общая стоимость продукта
         """
-        jewelry_slugs = self.products.keys()
-        jewelry_slugs = list(jewelry_slugs)
+        jewelry_slugs = list(self.products.keys())
+        jewelry_products = list(
+            Jewelry
+            .objects
+            .only("title", "slug", "main_photo")
+            .filter(slug__in=jewelry_slugs)
+        )
         for jew_slug in jewelry_slugs:
-            try:
-                jew = Jewelry.objects.get(slug__exact=jew_slug)
-            except ObjectDoesNotExist:
-                jew = None
+            jew = find(jewelry_products, jew_slug)
             item = dict(
                 product=jew,
                 price=float(self.products[jew_slug]['price']),
@@ -118,3 +120,10 @@ class Cart(object):
         self.products_updated = value
         self.session[CART_FORCED_TO_UPDATE] = self.products_updated
         self.session.modified = True
+
+
+def find(items: list, find_item: str) -> Jewelry or None:
+    for idx, item in enumerate(items):
+        if item.slug == find_item:
+            return items.pop(idx)
+    return None
