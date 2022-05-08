@@ -32,7 +32,11 @@ class Home(MenuMixin, TemplateView):
             .filter(is_in_stock=1)
             .order_by("-date_create")[:3]
         )
-        reviews = Review.objects.all()
+        reviews = (
+            Review
+            .objects
+            .only("title", "stars", "text")
+        )
         context["reviews"] = []
         for idx, review in enumerate(reviews):
             if idx % 3 == 0:
