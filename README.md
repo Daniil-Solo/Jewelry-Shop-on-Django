@@ -17,6 +17,16 @@
 * Front-end: HTML, CSS, Bootstrap
 * Back-end: Django, SQLite
 
-## Презентация
+## Быстрая презентация
 ### Домашняя страница
-![home](https://github.com/Daniil-Solo/Jewelry-Shop-on-Django/tree/master/source/gifs/home.gif)
+![home](source/gifs/home.gif)
+### Каталог
+![catalog](source/gifs/catalog.gif)
+### Вход и регистрация
+![auth-register](source/gifs/auth-register.gif)
+### Просмотр украшения
+![jewelry](source/gifs/jewelry-add.gif)
+### Заказ
+![order](source/gifs/order.gif)
+### Информационные страницы
+![info-pages](source/gifs/info-pages.gif)
