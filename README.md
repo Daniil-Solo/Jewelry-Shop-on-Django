@@ -13,10 +13,6 @@
 * Не привязан интернет-эквайринг (оплата оговаривается и производится при последующем разговоре с клиентом)
 * Отсутствует страница со стадией выполнения заказа (на вопросы о сроках отвечает мастер в чате, данные для отслеживания отправляются клиенту)
 
-## Текущий стек технологий
-* Front-end: HTML, CSS, Bootstrap
-* Back-end: Django, SQLite
-
 ## Быстрая презентация
 ### Домашняя страница
 ![home](source/gifs/home.gif)
@@ -30,3 +26,20 @@
 ![order](source/gifs/order.gif)
 ### Информационные страницы
 ![info-pages](source/gifs/info-pages.gif)
+
+
+## Текущий стек технологий
+* Front-end: HTML, CSS, Bootstrap
+* Back-end: Django, SQLite
+
+
+## Установка
+'''bash
+git clone https://github.com/Daniil-Solo/Jewelry-Shop-on-Django
+cd Jewelry-Shop-on-Django
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+cd jewshop
+python manage.py runserver
+'''
