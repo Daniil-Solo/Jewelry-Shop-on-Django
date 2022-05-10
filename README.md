@@ -34,7 +34,7 @@
 
 
 ## Установка
-'''bash
+```bash
 git clone https://github.com/Daniil-Solo/Jewelry-Shop-on-Django
 cd Jewelry-Shop-on-Django
 python -m venv venv
@@ -42,4 +42,4 @@ venv\Scripts\activate
 pip install -r requirements.txt
 cd jewshop
 python manage.py runserver
-'''
+```
